@@ -111,18 +111,15 @@
   <meta name="description" content="以下内容基于网络搬运及个人踩坑总结 环境配置 前端工具Node.js - 用于生成静态页面 1$ brew install nod 没有homebrew的话在Terminal键入： 1$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/in stall)&amp;quot;  前端工具">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在macOS平台搭建基于Github Paged的Hexo博客">
+<meta property="og:title" content="在macOS平台搭建基于Github Page的Hexo博客">
 <meta property="og:url" content="http://yoursite.com/2018/07/13/在macOS平台搭建基于Github Paged的Hexo博客/index.html">
 <meta property="og:site_name" content="T5eng&#39;s Blog">
 <meta property="og:description" content="以下内容基于网络搬运及个人踩坑总结 环境配置 前端工具Node.js - 用于生成静态页面 1$ brew install nod 没有homebrew的话在Terminal键入： 1$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/in stall)&amp;quot;  前端工具">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/Users/T5eng/HEXO/blog/source/images/hexo%20hello%20world.jpg">
-<meta property="og:image" content="http://yoursite.com/Users/T5eng/HEXO/blog/source/images/github%20repo.png">
-<meta property="og:updated_time" content="2018-07-13T12:54:24.856Z">
+<meta property="og:updated_time" content="2018-07-13T14:45:05.573Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在macOS平台搭建基于Github Paged的Hexo博客">
+<meta name="twitter:title" content="在macOS平台搭建基于Github Page的Hexo博客">
 <meta name="twitter:description" content="以下内容基于网络搬运及个人踩坑总结 环境配置 前端工具Node.js - 用于生成静态页面 1$ brew install nod 没有homebrew的话在Terminal键入： 1$ ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/in stall)&amp;quot;  前端工具">
-<meta name="twitter:image" content="http://yoursite.com/Users/T5eng/HEXO/blog/source/images/hexo%20hello%20world.jpg">
 
 
 
@@ -139,7 +136,7 @@
   };
 </script>
 
-  <title>在macOS平台搭建基于Github Paged的Hexo博客 | T5eng's Blog</title>
+  <title>在macOS平台搭建基于Github Page的Hexo博客 | T5eng's Blog</title>
   
 
 
@@ -301,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">在macOS平台搭建基于Github Paged的Hexo博客
+          <h1 class="post-title" itemprop="name headline">在macOS平台搭建基于Github Page的Hexo博客
               
             
           </h1>
@@ -326,7 +323,7 @@
                 
               
 
-              <time title="Created: 2018-07-13 20:51:55 / Modified: 20:54:24" itemprop="dateCreated datePublished" datetime="2018-07-13T20:51:55+08:00">2018-07-13</time>
+              <time title="Created: 2018-07-13 20:51:55 / Modified: 22:45:05" itemprop="dateCreated datePublished" datetime="2018-07-13T20:51:55+08:00">2018-07-13</time>
             
 
             
@@ -374,11 +371,11 @@
 <li><p>前端工具<strong>npm</strong> - Node Package Manager</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Git<br>  Mac AppStore安装Xcode自带Git工具</p>
+<li><p><strong>Git</strong><br>  Mac AppStore安装Xcode自带Git工具</p>
 </li>
 </ol>
 <ol start="4">
-<li><p>Hexo - 博客框架，一键生成静态页</p>
+<li><p><strong>Hexo</strong> - 博客框架，一键生成静态页</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g hexo</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -391,20 +388,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">_config.yml	</span><br><span class="line">db.json </span><br><span class="line">node_modules </span><br><span class="line">package.json</span><br><span class="line">scaffolds</span><br><span class="line">source</span><br><span class="line">themes</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol start="2">
+<ol start="3">
 <li><p>开启hexo服务器：</p>
 </li>
 <li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>浏览器中打开网址<a href="http://0.0.0.0:4000/" target="_blank" rel="noopener">http://localhost:4000</a>，能看到hexo的hello world，则本地环境搭建成功。</p>
-<p><img src="/Users/T5eng/HEXO/blog/source/images/hexo hello world.jpg" alt=""></p>
 </li>
 </ol>
 <h2 id="关联Github"><a href="#关联Github" class="headerlink" title="关联Github"></a>关联Github</h2><ol>
 <li><p>创建新的Github Repository作为github page的仓库：</p>
-<p><img src="/Users/T5eng/HEXO/blog/source/images/github repo.png" alt=""></p>
 <p>命名规则为：自定义.github.io</p>
 </li>
-<li><p>打开<folder>中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></folder></p>
+<li><p>打开folder中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <p>deploy:<br>  type: git<br>  repo: <a href="https://github.com/user_name/自定义.github.io.git" target="_blank" rel="noopener">https://github.com/user_name/自定义.github.io.git</a><br>  branch: master</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. 用hexo生成静态页：</span><br></pre></td></tr></table></figure>
 <p>$ hexo generate</p>
@@ -417,7 +412,7 @@
 </blockquote>
 <p>Username for ‘<a href="https://github.com&#39;" target="_blank" rel="noopener">https://github.com&#39;</a>:<br>Password for ‘<a href="https://github.com&#39;" target="_blank" rel="noopener">https://github.com&#39;</a>:<br><code>`</code></p>
 </li>
-<li><p>deploy执行后会将<folder>文件同步至git repo，根据网络状况可能上传失败，建议打开vpn。上传成功后打开<code>https://自定义.github.io</code>即可看到和打开<code>https://localhost:400</code>一样的Hello World。</folder></p>
+<li><p>deploy执行后会将<folder>文件同步至Git Repo，根据网络状况可能上传失败，建议打开vpn。上传成功后打开<code>https://自定义.github.io</code>即可看到和打开<code>https://localhost:400</code>一样的Hello World。</folder></p>
 </li>
 </ol>
 
