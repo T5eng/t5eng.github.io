@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1ft9lur2cjej31kw0i40yv.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1ft9lyd6b2jj311202cglx.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1ft9m7raq5sj306g04gaa1.jpg">
-<meta property="og:updated_time" content="2018-07-14T11:31:55.318Z">
+<meta property="og:updated_time" content="2018-07-14T11:36:54.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Google Cloud Platform的1年免费期搭建私人梯子">
 <meta name="twitter:description" content="Google Cloud Platform(以下简称GCP)是类似于AWS的云服务器平台，提供托管、计算、储存、人工智能api等服务。GCP新用户注册一年或300usd的礼包，且具有台湾地区服务器，ping在40ms以内，与国内dns延迟相当。下面介绍如何快速搭建。  注册Gmail Account首先你要有梯子，注册一个gmail账号，然后才能开始搭建梯子。（滑稽 注册GCP 打开网页 http">
@@ -114,7 +114,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#注册Gmail-Account"><span class="toc-number">1.</span> <span class="toc-text">注册Gmail Account</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册GCP"><span class="toc-number">2.</span> <span class="toc-text">注册GCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始部署服务器"><span class="toc-number">3.</span> <span class="toc-text">开始部署服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络设置"><span class="toc-number">4.</span> <span class="toc-text">网络设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在实例中安装SS服务"><span class="toc-number">5.</span> <span class="toc-text">在实例中安装SS服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在shadowsocks客户端连接梯子"><span class="toc-number">6.</span> <span class="toc-text">在shadowsocks客户端连接梯子</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#注册Gmail-Account"><span class="toc-number">1.</span> <span class="toc-text">注册Gmail Account</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注册GCP"><span class="toc-number">2.</span> <span class="toc-text">注册GCP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始部署服务器"><span class="toc-number">3.</span> <span class="toc-text">开始部署服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络设置"><span class="toc-number">4.</span> <span class="toc-text">网络设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在实例中安装SS服务"><span class="toc-number">5.</span> <span class="toc-text">在实例中安装SS服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在shadowsocks客户端连接梯子"><span class="toc-number">6.</span> <span class="toc-text">在shadowsocks客户端连接梯子</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -155,15 +155,13 @@
   <div class="content" itemprop="articleBody">
     <p>Google Cloud Platform(以下简称GCP)是类似于AWS的云服务器平台，提供托管、计算、储存、人工智能api等服务。GCP新用户注册一年或300usd的礼包，且具有台湾地区服务器，ping在40ms以内，与国内dns延迟相当。下面介绍如何快速搭建。</p>
 <hr>
-<h2 id="注册Gmail-Account"><a href="#注册Gmail-Account" class="headerlink" title="注册Gmail Account"></a>注册Gmail Account</h2><p>首先你要有梯子，注册一个gmail账号，然后才能开始搭建梯子。（滑稽</p>
-<h2 id="注册GCP"><a href="#注册GCP" class="headerlink" title="注册GCP"></a>注册GCP</h2><ol>
+<h1 id="注册Gmail-Account"><a href="#注册Gmail-Account" class="headerlink" title="注册Gmail Account"></a>注册Gmail Account</h1><p>首先你要有梯子，注册一个gmail账号，然后才能开始搭建梯子。（滑稽</p>
+<h1 id="注册GCP"><a href="#注册GCP" class="headerlink" title="注册GCP"></a>注册GCP</h1><ol>
 <li><p>打开网页 <a href="https://cloud.google.com/free/" target="_blank" rel="noopener">https://cloud.google.com/free/</a> ，选择免费试用GCP</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1ft9kvn6l40j31a608edhb.jpg" alt="image-20180714184242492"></p>
 </li>
-<li><p>同意条款 - 填写个人信息、地址（随意） - 填写<code>visa/master</code>信用卡信息</p>
-<blockquote>
+<li><p>同意条款 - 填写个人信息、地址（随意） - 填写<code>visa/master</code>信用卡信息.</p>
 <p>信用卡用于支付服务器费用，并会尝试扣1usd验证，然后退还。由于有首年或300usd的新用户礼包，因此第一年不花钱。</p>
-</blockquote>
 </li>
 <li><p>注册后检查自己是否获得新用户礼包。</p>
 <ol>
@@ -176,7 +174,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="开始部署服务器"><a href="#开始部署服务器" class="headerlink" title="开始部署服务器"></a>开始部署服务器</h2><ol>
+<h1 id="开始部署服务器"><a href="#开始部署服务器" class="headerlink" title="开始部署服务器"></a>开始部署服务器</h1><ol>
 <li><p>创建实例：</p>
 <p>选择<code>compute engine</code>的vm实例</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1ft9lavq7b2j31kw0evadd.jpg" alt="image-20180714185720274"></p>
@@ -191,7 +189,7 @@
 <p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1ft9lmey6ijj310q01uwer.jpg" alt="image-20180714190826609"></p>
 </li>
 </ol>
-<h2 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h2><ol>
+<h1 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h1><ol>
 <li>打开<code>VPC网络</code>设置，将刚刚创建的实例的外部IP设为静态，避免服务器重启后IP改变导致梯子失效。</li>
 </ol>
 <p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1ft9lprc6akj31kw0hoae8.jpg" alt="image-20180714191138428"></p>
@@ -207,12 +205,12 @@
 </ol>
 </li>
 </ol>
-<h2 id="在实例中安装SS服务"><a href="#在实例中安装SS服务" class="headerlink" title="在实例中安装SS服务"></a>在实例中安装SS服务</h2><ol>
+<h1 id="在实例中安装SS服务"><a href="#在实例中安装SS服务" class="headerlink" title="在实例中安装SS服务"></a>在实例中安装SS服务</h1><ol>
 <li>返回<code>compute engine</code>页面，用ssh通道操作实例:</li>
 </ol>
 <p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1ft9lyd6b2jj311202cglx.jpg" alt="image-20180714191954536"></p>
 <ol start="2">
-<li><p>获取root权限：</p>
+<li><p>获取root权限</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo su</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装SS：</p>
@@ -220,17 +218,14 @@
 </li>
 <li><p>配置ss服务器信息：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log</span><br></pre></td></tr></table></figure>
-<p>服务器端口：建议为 8989 </p>
-<p>密码：自定义 </p>
-<p>加密方式：建议改为chacha20</p>
-<p>协议（Protocol）：默认为 origin </p>
-<p>混淆（obfs）：默认为 plain</p>
-</li>
-<li><p>返回<code>compute engine</code>重置VM实例（即重启，不是停止或删除）</p>
+<p>服务器端口：建议为 8989<br>密码：自定义<br>加密方式：建议改为chacha20<br>协议（Protocol）：默认为 origin<br>混淆（obfs）：默认为 plain</p>
 </li>
 </ol>
+<ol start="5">
+<li>返回<code>compute engine</code>重置VM实例（即重启，不是停止或删除）</li>
+</ol>
 <p><strong>至此，服务器及梯子服务已经搭建完成。</strong></p>
-<h2 id="在shadowsocks客户端连接梯子"><a href="#在shadowsocks客户端连接梯子" class="headerlink" title="在shadowsocks客户端连接梯子"></a>在shadowsocks客户端连接梯子</h2><p>服务器地址即实例外部IP地址：<img src="https://ws3.sinaimg.cn/large/006tNc79gy1ft9m7raq5sj306g04gaa1.jpg" alt="image-20180714192856045"></p>
+<h1 id="在shadowsocks客户端连接梯子"><a href="#在shadowsocks客户端连接梯子" class="headerlink" title="在shadowsocks客户端连接梯子"></a>在shadowsocks客户端连接梯子</h1><p>服务器地址即实例外部IP地址：<img src="https://ws3.sinaimg.cn/large/006tNc79gy1ft9m7raq5sj306g04gaa1.jpg" alt="image-20180714192856045"></p>
 <p>密码、端口、加密方式均按以上自定义内容输入</p>
 <hr>
 <p>参考：</p>
@@ -262,7 +257,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#注册Gmail-Account"><span class="toc-number">1.</span> <span class="toc-text">注册Gmail Account</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册GCP"><span class="toc-number">2.</span> <span class="toc-text">注册GCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始部署服务器"><span class="toc-number">3.</span> <span class="toc-text">开始部署服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络设置"><span class="toc-number">4.</span> <span class="toc-text">网络设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在实例中安装SS服务"><span class="toc-number">5.</span> <span class="toc-text">在实例中安装SS服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在shadowsocks客户端连接梯子"><span class="toc-number">6.</span> <span class="toc-text">在shadowsocks客户端连接梯子</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#注册Gmail-Account"><span class="toc-number">1.</span> <span class="toc-text">注册Gmail Account</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注册GCP"><span class="toc-number">2.</span> <span class="toc-text">注册GCP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始部署服务器"><span class="toc-number">3.</span> <span class="toc-text">开始部署服务器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网络设置"><span class="toc-number">4.</span> <span class="toc-text">网络设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在实例中安装SS服务"><span class="toc-number">5.</span> <span class="toc-text">在实例中安装SS服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在shadowsocks客户端连接梯子"><span class="toc-number">6.</span> <span class="toc-text">在shadowsocks客户端连接梯子</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
