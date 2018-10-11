@@ -307,7 +307,13 @@
 <p>1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。</p>
 <p>2001年，IBM使用7个量子比特的计算器，用Shor算法实现15分解成3x5.</p>
 <p>2018年，IBM实现50量子比特的处理器原型。掌握50量子比特计算机成熟技术的国家将实现“量子霸权”（Quantum Computational Supremacy）。</p>
-<h2 id="量子位和量子寄存器"><a href="#量子位和量子寄存器" class="headerlink" title="量子位和量子寄存器"></a>量子位和量子寄存器</h2><p>相较于传统计算机，量子机定义了“<strong>量子位</strong>”（Qubit）。Qubit可以像传统计算机一样处于“0”态或“1”态，也可以处于<strong>叠加态</strong>。在量子力学中用狄拉克符号表示一个Qubit:<br>$$<br>| \psi \rangle = a <em> | 0 \rangle + b</em> | 1 \rangle<br>$$<br>其中：|0&gt;与|1&gt;为<strong>基本态</strong>；a,b为<strong>概率幅</strong>，且有：<br>$$<br>|a|^2+|b|^2=1<br>$$<br>对于2个Qubit组成的<strong>希尔伯特(Hilbert)空间</strong>，会具有4个基本态，其叠加态为：<br>$$<br>| \psi \rangle = a_{00}   <em> |00 \rangle + a_{01}   </em> |01 \rangle + a_{10}   <em> |10 \rangle + a_{11}   </em> |11 \rangle<br>$$<br>其中各参数定义与单Qubit情况类似。</p>
+<h2 id="量子位和量子寄存器"><a href="#量子位和量子寄存器" class="headerlink" title="量子位和量子寄存器"></a>量子位和量子寄存器</h2><p>相较于传统计算机，量子机定义了“<strong>量子位</strong>”（Qubit）。Qubit可以像传统计算机一样处于“0”态或“1”态，也可以处于<strong>叠加态</strong>。在量子力学中用狄拉克符号表示一个Qubit:</p>
+<script type="math/tex; mode=display">
+| \psi \rangle = a * | 0 \rangle + b* | 1 \rangle</script><p>其中：|0&gt;与|1&gt;为<strong>基本态</strong>；a,b为<strong>概率幅</strong>，且有：</p>
+<script type="math/tex; mode=display">
+|a|^2+|b|^2=1</script><p>对于2个Qubit组成的<strong>希尔伯特(Hilbert)空间</strong>，会具有4个基本态，其叠加态为：</p>
+<script type="math/tex; mode=display">
+| \psi \rangle = a_{00}   * |00 \rangle + a_{01}   * |01 \rangle + a_{10}   * |10 \rangle + a_{11}   * |11 \rangle</script><p>其中各参数定义与单Qubit情况类似。</p>
 <p>推广到N位Qubit可知，将具有2^n种相互正交的基本态，因此量子寄存器位数的<strong>线性增长</strong>将实现量子寄存器容量的<strong>指数增长</strong>。</p>
 <h2 id="量子逻辑门"><a href="#量子逻辑门" class="headerlink" title="量子逻辑门"></a>量子逻辑门</h2><p>个人理解，Qubit的计算可以参考线性代数。</p>
 <p>对量子寄存器叠加态进行变换（幺正变换）以实现逻辑功能的操作，称为<strong>量子逻辑门</strong>。</p>
@@ -315,10 +321,15 @@
 <p>叠加态的量子比特在多维空间上进行线性变换（量子学称为<strong>幺正变换</strong>）：将叠加态左乘一个<strong>幺正矩阵</strong>（量子逻辑门），可以同时对叠加态中所有Qubit进行变换，因此量子计算具有并行性。即对量子寄存器进行一次幺正变换，相当于传统计算机进行2^n次运算。</p>
 <p>而传统计算机由于部分计算是串行的，因此不可能通过无限增加处理器数量达到100%并行。</p>
 <h2 id="量子测量与输出"><a href="#量子测量与输出" class="headerlink" title="量子测量与输出"></a>量子测量与输出</h2><p>对叠加态量子体系的测量将造成波函数的坍缩，使叠加态转化为基态。即n位的量子寄存器叠加保存了2^n个二进制数，但输出结果只能为n位的二进制数。</p>
-<p>如n=2的情况：<br>$$<br>| \psi \rangle = a_{00}   <em> |00 \rangle + a_{01}   </em> |01 \rangle + a_{10}   <em> |10 \rangle + a_{11}   </em> |11 \rangle<br>$$<br>测量后，量子体系将会坍缩到|00&gt;、|01&gt;、|10&gt;、|11&gt;四种状态之一，且坍缩的过程是随机的。因此量子计算的目的就是设计量子算法（通过幺正变换），使所需要的结果的概率尽可能大，不需要的结果的概率尽可能小。</p>
+<p>如n=2的情况：</p>
+<script type="math/tex; mode=display">
+| \psi \rangle = a_{00}   * |00 \rangle + a_{01}   * |01 \rangle + a_{10}   * |10 \rangle + a_{11}   * |11 \rangle</script><p>测量后，量子体系将会坍缩到|00&gt;、|01&gt;、|10&gt;、|11&gt;四种状态之一，且坍缩的过程是随机的。因此量子计算的目的就是设计量子算法（通过幺正变换），使所需要的结果的概率尽可能大，不需要的结果的概率尽可能小。</p>
 <p>对于多量子体系，各个量子的测量是相对独立的，且符合统计原理的。</p>
-<p>例如，对第一个Qubit的测量结果为0的概率为：<br>$$<br>P_{|00 \rangle + |01 \rangle} =  |a_{00}|^2 + |a_{01}|^2<br>$$<br>若测量得知第一个Qubit结果为0，此时测量第二个Qubit概率分布应为：<br>$$<br>P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}<br>$$</p>
-
+<p>例如，对第一个Qubit的测量结果为0的概率为：</p>
+<script type="math/tex; mode=display">
+P_{|00 \rangle + |01 \rangle} =  |a_{00}|^2 + |a_{01}|^2</script><p>若测量得知第一个Qubit结果为0，此时测量第二个Qubit概率分布应为：</p>
+<script type="math/tex; mode=display">
+P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
           
         
       
@@ -566,6 +577,7 @@
         
           
             <p>是日填一个拖了7个月的坑，记录下2017.5-2017.12的考研的生活，也为后面报考深圳大学计算机与软件学院的师弟妹指一下路。因为在本人报考的时候一直找不到靠谱的师兄师姐给我分享经验，多亏计算机408是全国统考科目，让我能一直在华工中大的考研群里面蹭经验和资料。最终以总分330的成绩考进软工专业第6。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -584,6 +596,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>​         </p>
 <h2 id="研究生考试流水线"><a href="#研究生考试流水线" class="headerlink" title="研究生考试流水线"></a>研究生考试流水线</h2><h3 id="1、确定报考学校、专业"><a href="#1、确定报考学校、专业" class="headerlink" title="1、确定报考学校、专业"></a>1、确定报考学校、专业</h3><p><strong><em>求乎其上，得乎其中；求乎其中，得乎其下。</em></strong></p>
 <p>深圳大学Computer Science相关的专业包括了计算机科学与技术（学硕）、计算机技术（专硕）以及软件工程（专硕）。从开始复习到最终确定志愿之前，我的目标一直是华南理工大学，参考17年考研，华工计算机学硕全保研，没有统考名额；计算机专硕最低分310+，平均分340；软工最低分300，一志愿未招满。<br>根据网上的经验贴（<a href="http://cskaoyan.com/" target="_blank" rel="noopener">王道论坛</a>，<a href="http://zhihu.com/" target="_blank" rel="noopener">知乎</a>），大概估算自己力所能及的考试成绩，数学在90~110分左右，英语政治60~70，计算机408不超过90，能达到华工软工的平均分，对于跨考生来说，还能保证自己在复试不被超额录取（华工招录比1：1.5）淘汰，比较稳妥。</p>
@@ -623,8 +636,8 @@
 <p>全书2轮之后开始按实际考试要求完成历年真题，从1990年卷开始体验社会阶级上升通道的收缩（难度逐年提高）。鉴于全书例题多数为历年真题，因此卷面分数扣除10分较为接近实际应得分数。张宇强调：<strong>轻分数，重补漏。</strong>刷真题目的是体验考试做题模式，发现自己知识体系漏洞，回看全书、视频课、甚至教科书。</p>
 <p>最后1、2个月可能陷入没有题目可做的尴尬，这时候我的方法是重做错题，保持思维活跃；归纳一下常用的解题套路。</p>
 <p>考研数学有大小年的习惯，2018年特别难，2019预测简单，要特别注重基础概念的理解和运用，不必要浪费头发在压轴题上。</p>
-<p>  <br></p>
-<ol start="2">
+<p>  &lt;/br&gt;</p>
+<ol>
 <li><h4 id="计算机专业基础408"><a href="#计算机专业基础408" class="headerlink" title="计算机专业基础408"></a>计算机专业基础408</h4></li>
 </ol>
 <p>参考书：王道4本、王道历年真题分析、王道最后8套</p>
@@ -635,15 +648,15 @@
 <p>相比之下，<strong>网络</strong>和<strong>操作系统</strong>偏文科，可以借助思维导图把各章节的联系可视化展现，很容易理解，纯粹的记忆居多，按下不表。</p>
 <p>408后期复习方法与数学一样，真题一轮完成后反复看王道4本，强化自己的弱项，归纳错题，归纳常见套路，再做第二轮真题。</p>
 <p>2018年408偏简单，大题与历年真题雷同。据说是命题组换届导致的，究竟是出题思路的改变，还是大小年的规律？让我们走近科学。</p>
-<p><br></p>
-<ol start="3">
+<p>&lt;/br&gt;</p>
+<ol>
 <li><h4 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h4></li>
 </ol>
 <p>参考书：真题</p>
 <p>2天一套真题保持手感，一天做题，一天背真题中的陌生单词。神乎其神的kk三步法就是高中英语的套路。大小作文考前背模板，只要不犯语法错误，考生之间差距在5分之内。</p>
 <p>得阅读者得天下。</p>
-<p><br> </p>
-<ol start="4">
+<p>&lt;/br&gt; </p>
+<ol>
 <li><h4 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h4></li>
 </ol>
 <p>参考书：肖1000，时政小册，临考押题资料，肖4肖8，热点剖析</p>
@@ -652,26 +665,27 @@
 <p>肖4肖8必须做，大题压得还可以，最后1个月抱着背。</p>
 <p>考试答题写尽可能多，尽可能写满，评卷只按答对的点计分，答错不扣分。<strong>选择题</strong>是拉分关键。</p>
 <p>2018年的政治大题，答案都可以在题干获取，即只要你知道要答什么，直接抄就可以了，但并不是说备考不需要背诵，也许2018是故意送分呢？</p>
-<p><br> </p>
+<p>&lt;/br&gt; </p>
 <p>最终目的是，在各科过线的前提下，合理分配时间复习，用最少头发实现最大化总分。</p>
 <hr>
 <h3 id="4、复试经历"><a href="#4、复试经历" class="headerlink" title="4、复试经历"></a>4、复试经历</h3><p><strong>公布初试成绩</strong>：2018年3月22日。</p>
 <p>复试前，通过email联系过3个教授、副教授级别的导师，均无回音。过程中归纳整理了深大计软学院官网上，所有已公开email的导师的研究方向和联系方式，有需要的可以联系我获取。</p>
-<p><br></p>
+<p>&lt;/br&gt;</p>
 <p>深圳大学复试分为2天：</p>
 <ol>
 <li><p>第一天晚上笔试，主要考数据结构，五道简答题 + 一道LeetCode - medium级别的算法，笔试成绩供第二天面试参考用。</p>
 </li>
 <li><p>第二天为面试，总共有4个导师提问以及1个师兄负责记录。进门随机抽取一张卡片，上面有200字左右cs相关的文章节选，以及一道算法题。先进行2分钟左右的英文自我介绍，然后朗读卡片上的文章节选并口译成中文，然后讲解算法题思路。当时我抽到的是<strong>八皇后问题</strong>，之前没有接触过，所以只回答出一次遍历的结果，忽略了有多个解的可能性，回答的不是很好。 </p>
-<p><br></p>
+<p>&lt;/br&gt;</p>
 </li>
 </ol>
 <p>次日，面试的导师中一个做CV的主动联系我，邀请我加入他的实验室，欣然答应。</p>
-<p><br></p>
+<p>&lt;/br&gt;</p>
 <p><strong>公布拟录取名单</strong>：2018年4月27日公布，初试+复试总分排名第8，正式考上深大。</p>
-<p><br><br><br><br><br></p>
+<p>&lt;/br&gt;<br>&lt;/br&gt;<br>&lt;/br&gt;</p>
 <p>计划通。</p>
 <hr>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -683,7 +697,7 @@
 <td style="text-align:center">复习用书</td>
 </tr>
 <tr>
-<td style="text-align:center"><br></td>
+<td style="text-align:center">&lt;/br&gt;</td>
 </tr>
 <tr>
 <td style="text-align:center"><img src="https://ws1.sinaimg.cn/large/006tNc79gy1ftqtlmwnvqj30iq0jy791.jpg" alt="成绩单"></td>
@@ -693,6 +707,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 
           
         
@@ -852,7 +867,7 @@
 <li>打开<code>VPC网络</code>设置，将刚刚创建的实例的外部IP设为静态，避免服务器重启后IP改变导致梯子失效。</li>
 </ol>
 <p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1ft9lprc6akj31kw0hoae8.jpg" alt="image-20180714191138428"></p>
-<ol start="2">
+<ol>
 <li><p>设置防火墙规则，允许外部主机访问：</p>
 <ol>
 <li><p>流量方向<code>入站</code>、来源ip地址<code>0.0.0.0/0</code>、协议和端口<code>全部允许</code></p>
@@ -868,7 +883,7 @@
 <li>返回<code>compute engine</code>页面，用ssh通道操作实例:</li>
 </ol>
 <p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1ft9lyd6b2jj311202cglx.jpg" alt="image-20180714191954536"></p>
-<ol start="2">
+<ol>
 <li><p>获取root权限</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo su</span><br></pre></td></tr></table></figure>
 </li>
@@ -880,7 +895,7 @@
 <p>服务器端口：建议为 8989<br>密码：自定义<br>加密方式：建议改为chacha20<br>协议（Protocol）：默认为 origin<br>混淆（obfs）：默认为 plain</p>
 </li>
 </ol>
-<ol start="5">
+<ol>
 <li>返回<code>compute engine</code>重置VM实例（即重启，不是停止或删除）</li>
 </ol>
 <p><strong>至此，服务器及梯子服务已经搭建完成。</strong></p>
@@ -1023,7 +1038,7 @@
 <p>  otherwise, visit <a href="https://git-scm.com/download" target="_blank" rel="noopener">https://git-scm.com/download</a></p>
 </li>
 </ol>
-<ol start="4">
+<ol>
 <li><p><strong>Hexo</strong> - 博客框架，一键生成静态页</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g hexo</span><br></pre></td></tr></table></figure>
 </li>
@@ -1037,7 +1052,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">_config.yml	</span><br><span class="line">db.json </span><br><span class="line">node_modules </span><br><span class="line">package.json</span><br><span class="line">scaffolds</span><br><span class="line">source</span><br><span class="line">themes</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol start="3">
+<ol>
 <li><p>开启hexo服务器：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>浏览器中打开网址<a href="http://0.0.0.0:4000/" target="_blank" rel="noopener">http://localhost:4000</a>，能看到hexo的hello world，则本地环境搭建成功。</p>
@@ -1053,7 +1068,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/user_name/自定义.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol start="3">
+<ol>
 <li><p>用hexo生成静态页：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 </li>
@@ -1065,7 +1080,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Deploy done: git</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol start="5">
+<ol>
 <li><p>首次运行要输入github账户密码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Username for &apos;https://github.com&apos;:</span><br><span class="line">Password for &apos;https://github.com&apos;:</span><br></pre></td></tr></table></figure>
 </li>

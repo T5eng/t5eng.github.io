@@ -307,7 +307,13 @@
 <p>1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。</p>
 <p>2001年，IBM使用7个量子比特的计算器，用Shor算法实现15分解成3x5.</p>
 <p>2018年，IBM实现50量子比特的处理器原型。掌握50量子比特计算机成熟技术的国家将实现“量子霸权”（Quantum Computational Supremacy）。</p>
-<h2 id="量子位和量子寄存器"><a href="#量子位和量子寄存器" class="headerlink" title="量子位和量子寄存器"></a>量子位和量子寄存器</h2><p>相较于传统计算机，量子机定义了“<strong>量子位</strong>”（Qubit）。Qubit可以像传统计算机一样处于“0”态或“1”态，也可以处于<strong>叠加态</strong>。在量子力学中用狄拉克符号表示一个Qubit:<br>$$<br>| \psi \rangle = a <em> | 0 \rangle + b</em> | 1 \rangle<br>$$<br>其中：|0&gt;与|1&gt;为<strong>基本态</strong>；a,b为<strong>概率幅</strong>，且有：<br>$$<br>|a|^2+|b|^2=1<br>$$<br>对于2个Qubit组成的<strong>希尔伯特(Hilbert)空间</strong>，会具有4个基本态，其叠加态为：<br>$$<br>| \psi \rangle = a_{00}   <em> |00 \rangle + a_{01}   </em> |01 \rangle + a_{10}   <em> |10 \rangle + a_{11}   </em> |11 \rangle<br>$$<br>其中各参数定义与单Qubit情况类似。</p>
+<h2 id="量子位和量子寄存器"><a href="#量子位和量子寄存器" class="headerlink" title="量子位和量子寄存器"></a>量子位和量子寄存器</h2><p>相较于传统计算机，量子机定义了“<strong>量子位</strong>”（Qubit）。Qubit可以像传统计算机一样处于“0”态或“1”态，也可以处于<strong>叠加态</strong>。在量子力学中用狄拉克符号表示一个Qubit:</p>
+<script type="math/tex; mode=display">
+| \psi \rangle = a * | 0 \rangle + b* | 1 \rangle</script><p>其中：|0&gt;与|1&gt;为<strong>基本态</strong>；a,b为<strong>概率幅</strong>，且有：</p>
+<script type="math/tex; mode=display">
+|a|^2+|b|^2=1</script><p>对于2个Qubit组成的<strong>希尔伯特(Hilbert)空间</strong>，会具有4个基本态，其叠加态为：</p>
+<script type="math/tex; mode=display">
+| \psi \rangle = a_{00}   * |00 \rangle + a_{01}   * |01 \rangle + a_{10}   * |10 \rangle + a_{11}   * |11 \rangle</script><p>其中各参数定义与单Qubit情况类似。</p>
 <p>推广到N位Qubit可知，将具有2^n种相互正交的基本态，因此量子寄存器位数的<strong>线性增长</strong>将实现量子寄存器容量的<strong>指数增长</strong>。</p>
 <h2 id="量子逻辑门"><a href="#量子逻辑门" class="headerlink" title="量子逻辑门"></a>量子逻辑门</h2><p>个人理解，Qubit的计算可以参考线性代数。</p>
 <p>对量子寄存器叠加态进行变换（幺正变换）以实现逻辑功能的操作，称为<strong>量子逻辑门</strong>。</p>
@@ -315,10 +321,15 @@
 <p>叠加态的量子比特在多维空间上进行线性变换（量子学称为<strong>幺正变换</strong>）：将叠加态左乘一个<strong>幺正矩阵</strong>（量子逻辑门），可以同时对叠加态中所有Qubit进行变换，因此量子计算具有并行性。即对量子寄存器进行一次幺正变换，相当于传统计算机进行2^n次运算。</p>
 <p>而传统计算机由于部分计算是串行的，因此不可能通过无限增加处理器数量达到100%并行。</p>
 <h2 id="量子测量与输出"><a href="#量子测量与输出" class="headerlink" title="量子测量与输出"></a>量子测量与输出</h2><p>对叠加态量子体系的测量将造成波函数的坍缩，使叠加态转化为基态。即n位的量子寄存器叠加保存了2^n个二进制数，但输出结果只能为n位的二进制数。</p>
-<p>如n=2的情况：<br>$$<br>| \psi \rangle = a_{00}   <em> |00 \rangle + a_{01}   </em> |01 \rangle + a_{10}   <em> |10 \rangle + a_{11}   </em> |11 \rangle<br>$$<br>测量后，量子体系将会坍缩到|00&gt;、|01&gt;、|10&gt;、|11&gt;四种状态之一，且坍缩的过程是随机的。因此量子计算的目的就是设计量子算法（通过幺正变换），使所需要的结果的概率尽可能大，不需要的结果的概率尽可能小。</p>
+<p>如n=2的情况：</p>
+<script type="math/tex; mode=display">
+| \psi \rangle = a_{00}   * |00 \rangle + a_{01}   * |01 \rangle + a_{10}   * |10 \rangle + a_{11}   * |11 \rangle</script><p>测量后，量子体系将会坍缩到|00&gt;、|01&gt;、|10&gt;、|11&gt;四种状态之一，且坍缩的过程是随机的。因此量子计算的目的就是设计量子算法（通过幺正变换），使所需要的结果的概率尽可能大，不需要的结果的概率尽可能小。</p>
 <p>对于多量子体系，各个量子的测量是相对独立的，且符合统计原理的。</p>
-<p>例如，对第一个Qubit的测量结果为0的概率为：<br>$$<br>P_{|00 \rangle + |01 \rangle} =  |a_{00}|^2 + |a_{01}|^2<br>$$<br>若测量得知第一个Qubit结果为0，此时测量第二个Qubit概率分布应为：<br>$$<br>P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}<br>$$</p>
-
+<p>例如，对第一个Qubit的测量结果为0的概率为：</p>
+<script type="math/tex; mode=display">
+P_{|00 \rangle + |01 \rangle} =  |a_{00}|^2 + |a_{01}|^2</script><p>若测量得知第一个Qubit结果为0，此时测量第二个Qubit概率分布应为：</p>
+<script type="math/tex; mode=display">
+P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
       
     </div>
     
