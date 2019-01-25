@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -161,7 +161,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -187,6 +187,26 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -250,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">量子计算简述 - intro</h1>
+          <h2 class="post-title" itemprop="name headline">量子计算简述 - intro</h2>
         
 
         <div class="post-meta">
@@ -283,6 +303,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  916
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -327,6 +366,35 @@
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ben Tseng 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Ben Tseng 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -483,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#量子计算发展史"><span class="nav-number">1.</span> <span class="nav-text">量子计算发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子位和量子寄存器"><span class="nav-number">2.</span> <span class="nav-text">量子位和量子寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子逻辑门"><span class="nav-number">3.</span> <span class="nav-text">量子逻辑门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子测量与输出"><span class="nav-number">4.</span> <span class="nav-text">量子测量与输出</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#量子计算发展史"><span class="nav-text">量子计算发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子位和量子寄存器"><span class="nav-text">量子位和量子寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子逻辑门"><span class="nav-text">量子逻辑门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子测量与输出"><span class="nav-text">量子测量与输出</span></a></li></ol></div>
             
 
           </div>
@@ -494,6 +562,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       

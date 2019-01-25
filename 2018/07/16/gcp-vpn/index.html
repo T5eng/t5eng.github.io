@@ -113,7 +113,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -174,7 +174,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -200,6 +200,26 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -263,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">利用Google Cloud Platform的1年免费期搭建私人梯子</h1>
+          <h2 class="post-title" itemprop="name headline">利用Google Cloud Platform的1年免费期搭建私人梯子</h2>
         
 
         <div class="post-meta">
@@ -296,6 +316,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  618
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -400,6 +439,35 @@
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Ben Tseng 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Ben Tseng 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -556,7 +624,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注册Gmail-Account"><span class="nav-number">1.</span> <span class="nav-text">注册Gmail Account</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册GCP"><span class="nav-number">2.</span> <span class="nav-text">注册GCP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始部署服务器"><span class="nav-number">3.</span> <span class="nav-text">开始部署服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络设置"><span class="nav-number">4.</span> <span class="nav-text">网络设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在实例中安装SS服务"><span class="nav-number">5.</span> <span class="nav-text">在实例中安装SS服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在shadowsocks客户端连接梯子"><span class="nav-number">6.</span> <span class="nav-text">在shadowsocks客户端连接梯子</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注册Gmail-Account"><span class="nav-text">注册Gmail Account</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册GCP"><span class="nav-text">注册GCP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始部署服务器"><span class="nav-text">开始部署服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络设置"><span class="nav-text">网络设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在实例中安装SS服务"><span class="nav-text">在实例中安装SS服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在shadowsocks客户端连接梯子"><span class="nav-text">在shadowsocks客户端连接梯子</span></a></li></ol></div>
             
 
           </div>
@@ -567,6 +635,8 @@
       
         <div class="back-to-top">
           <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
           
         </div>
       
