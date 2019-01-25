@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ML," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ML 入门：归一化、标准化和正则化因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：https://zhuanlan.zhihu.com/p/29957294  0x01 归一化 Normalization归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。 常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML 入门：归一化、标准化和正则化">
+<meta property="og:url" content="http://yoursite.com/2018/11/30/Norm_Reg_/index.html">
+<meta property="og:site_name" content="T5eng&#39;s Blog">
+<meta property="og:description" content="ML 入门：归一化、标准化和正则化因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：https://zhuanlan.zhihu.com/p/29957294  0x01 归一化 Normalization归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。 常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=x_%7Bnew%7D%3D%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=7.50%C3%9710%5E%7B9%7D%2FL">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=x_%7Bnew%7D%3D%5Cfrac%7Bx-%5Cmu+%7D%7B%5Csigma+%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Cmu">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Csigma">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxqdkjodqij30k0053749.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxqdkyh8c5j30k00b9q3g.jpg">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=J%28w%2Cb%29">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=w">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=b">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=J%28w%2Cb%29">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5E%7B%5B1%5D%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5E%7B%5B2%5D%7D">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxqdl5v9ewj30k00gcmyg.jpg">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Cgamma">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Cbeta+">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=J%28w%2Cb%29%3D+%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7DL%28f%28x%29%2Cy%29%2B%5Clambda+R%28f%29">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%CE%BB%E2%89%A50">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5E%7B%5B3%5D%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=L_%7Bp%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=L_%7Bp%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=L_%7Bp%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=L_%7B0%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7B0%7D+%3D+%5C%23%28i%29%5C+with+%5C+x_%7Bi%7D+%5Cneq+0">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=L_%7B1%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7B1%7D+%3D+%5Csum_%7Bi+%3D+1%7D%5E%7Bd%7D%5Clvert+x_i%5Crvert">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=L_%7B2%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7B2%7D+%3D+%5CBigl%28%5Csum_%7Bi+%3D+1%7D%5E%7Bd%7D+x_i%5E2%5CBigr%29%5E%7B1%2F2%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=L_%7Bp%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7Bp%7D+%3D+%5CBigl%28%5Csum_%7Bi+%3D+1%7D%5E%7Bd%7D+x_i%5Ep%5CBigr%29%5E%7B1%2Fp%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=%5ClVert+w%5CrVert_p">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=L_%7Bp%7D">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxqdn8qrvzj30k00j5aaz.jpg">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=J%28w%2Cb%29%3D%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7DL%28%5Chat%7By%7D%2Cy%29%2B%5Cfrac%7B%5Clambda+%7D%7Bm%7D%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7B1%7D">
+<meta property="og:image" content="http://www.zhihu.com/equation?tex=J%28w%2Cb%29%3D%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7DL%28%5Chat%7By%7D%2Cy%29%2B%5Cfrac%7B%5Clambda+%7D%7B2m%7D%5Cleft+%5C%7C+w+%5Cright+%5C%7C%5E%7B2%7D_%7B2%7D">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxqdnb7i3kj30k009q0tp.jpg">
+<meta property="og:updated_time" content="2018-11-30T12:48:29.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ML 入门：归一化、标准化和正则化">
+<meta name="twitter:description" content="ML 入门：归一化、标准化和正则化因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：https://zhuanlan.zhihu.com/p/29957294  0x01 归一化 Normalization归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。 常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的">
+<meta name="twitter:image" content="http://www.zhihu.com/equation?tex=x_%7Bnew%7D%3D%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/30/Norm_Reg_/"/>
+
+
+
+
+
+  <title>ML 入门：归一化、标准化和正则化 | T5eng's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">T5eng's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/Norm_Reg_/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Tseng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="T5eng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ML 入门：归一化、标准化和正则化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-30T15:24:00+03:00">
+                2018-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ML-入门：归一化、标准化和正则化"><a href="#ML-入门：归一化、标准化和正则化" class="headerlink" title="ML 入门：归一化、标准化和正则化"></a>ML 入门：归一化、标准化和正则化</h1><p>因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：<a href="https://zhuanlan.zhihu.com/p/29957294" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/29957294</a> </p>
+<h2 id="0x01-归一化-Normalization"><a href="#0x01-归一化-Normalization" class="headerlink" title="0x01 归一化 Normalization"></a><strong>0x01 归一化 Normalization</strong></h2><p>归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。</p>
+<p>常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的归一化方法就是 <strong>Min-Max 归一化</strong>：</p>
+<h2 id="Min-Max-归一化"><a href="#Min-Max-归一化" class="headerlink" title="Min-Max 归一化"></a><strong>Min-Max 归一化</strong></h2><p><img src="http://www.zhihu.com/equation?tex=x_%7Bnew%7D%3D%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D" alt="x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}"></p>
+<p>举个例子，我们判断一个人的身体状况是否健康，那么我们会采集人体的很多指标，比如说：身高、体重、红细胞数量、白细胞数量等。</p>
+<p>一个人身高 180cm，体重 70kg，白细胞计数 <img src="http://www.zhihu.com/equation?tex=7.50%C3%9710%5E%7B9%7D%2FL" alt="7.50×10^{9}/L"> ，etc.</p>
+<p>衡量两个人的状况时，白细胞计数就会起到主导作用从而<strong>遮盖住其他的特征</strong>，归一化后就不会有这样的问题。</p>
+<h2 id="0x02-标准化-Normalization"><a href="#0x02-标准化-Normalization" class="headerlink" title="0x02 标准化 Normalization"></a><strong>0x02 标准化 Normalization</strong></h2><p><strong>在这里我们需要强调一下英文翻译的问题，在 Udacity 字幕组中对此进行了探讨：</strong></p>
+<blockquote>
+<p>归一化和标准化的英文翻译是一致的，但是根据其用途（或公式）的不同去理解（或翻译）</p>
+</blockquote>
+<p>下面我们将探讨最常见的标准化方法： <strong>Z-Score 标准化</strong>。</p>
+<h2 id="Z-Score-标准化"><a href="#Z-Score-标准化" class="headerlink" title="Z-Score 标准化"></a><strong>Z-Score 标准化</strong></h2><p><img src="http://www.zhihu.com/equation?tex=x_%7Bnew%7D%3D%5Cfrac%7Bx-%5Cmu+%7D%7B%5Csigma+%7D" alt="x_{new}=\frac{x-\mu }{\sigma }"></p>
+<p>其中 <img src="http://www.zhihu.com/equation?tex=%5Cmu" alt="\mu"> 是样本数据的<strong>均值（mean）</strong>， <img src="http://www.zhihu.com/equation?tex=%5Csigma" alt="\sigma"> 是样本数据的<strong>标准差（std）</strong>。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxqdkjodqij30k0053749.jpg" alt="img"></p>
+<p>上图则是一个散点序列的标准化过程：原图-&gt;减去均值-&gt;除以标准差。</p>
+<p>显而易见，变成了一个<strong>均值为 0 ，方差为 1 的分布</strong>，下图通过 Cost 函数让我们更好的理解标准化的作用。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxqdkyh8c5j30k00b9q3g.jpg" alt="img"></p>
+<p>机器学习的目标无非就是不断优化损失函数，使其值最小。在上图中， <img src="http://www.zhihu.com/equation?tex=J%28w%2Cb%29" alt="J(w,b)"> 就是我们要优化的目标函数</p>
+<p>我们不难看出，<strong>标准化后可以更加容易地得出最优参数</strong> <img src="http://www.zhihu.com/equation?tex=w" alt="w"> <strong>和</strong> <img src="http://www.zhihu.com/equation?tex=b" alt="b"> <strong>以及计算出</strong> <img src="http://www.zhihu.com/equation?tex=J%28w%2Cb%29" alt="J(w,b)"> <strong>的最小值，从而达到加速收敛的效果</strong>。 <img src="http://www.zhihu.com/equation?tex=%5E%7B%5B1%5D%7D" alt="^{[1]}"></p>
+<p><em>注：上图来源于 Andrew Ng 的课程讲义</em></p>
+<h2 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a><strong>Batch Normalization</strong></h2><p>在机器学习中，<strong>最常用标准化的地方</strong>莫过于神经网络的 <strong>BN 层（Batch Normalization）</strong>，因此我们简单的谈谈 BN 层的原理和作用，想要更深入的了解可以<a href="http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1502.03167" target="_blank" rel="noopener">查看论文</a>。</p>
+<p>我们知道数据预处理做标准化可以加速收敛，同理，在神经网络使用标准化也可以<strong>加速收敛</strong>，而且还有如下好处：</p>
+<ul>
+<li>具有正则化的效果（Batch Normalization reglarizes the model）</li>
+<li>提高模型的泛化能力（Be advantageous to the generalization of network）</li>
+<li>允许更高的学习速率从而加速收敛（Batch Normalization enables higher learning rates）</li>
+</ul>
+<p>其原理是<strong>利用正则化减少内部相关变量分布的偏移（Reducing Internal Covariate Shift）</strong>，从而<strong>提高了算法的鲁棒性</strong>。 <img src="http://www.zhihu.com/equation?tex=%5E%7B%5B2%5D%7D" alt="^{[2]}"></p>
+<p>Batch Normalization 由两部分组成，第一部分是<strong>缩放与平移（scale and shift）</strong>，第二部分是<strong>训练缩放尺度和平移的参数（train a BN Network）</strong>，算法步骤如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxqdl5v9ewj30k00gcmyg.jpg" alt="img"></p>
+<p>接下来训练 BN 层参数  <img src="http://www.zhihu.com/equation?tex=%5Cgamma" alt="\gamma"> 和  <img src="http://www.zhihu.com/equation?tex=%5Cbeta+" alt="\beta "> ，限于篇幅的原因按下不表，有兴趣的读者可以拜读<a href="http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1502.03167" target="_blank" rel="noopener">这篇论文</a>。</p>
+<h2 id="0x03-正则化-Regularization"><a href="#0x03-正则化-Regularization" class="headerlink" title="0x03 正则化 Regularization"></a><strong>0x03 正则化 Regularization</strong></h2><p><strong>正则化主要用于避免过拟合的产生和减少网络误差。</strong></p>
+<p>正则化一般具有如下形式：</p>
+<p><img src="http://www.zhihu.com/equation?tex=J%28w%2Cb%29%3D+%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7DL%28f%28x%29%2Cy%29%2B%5Clambda+R%28f%29" alt="J(http://www.zhihu.com/equation?tex=J%28w%2Cb%29%3D+%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7DL%28f%28x%29%2Cy%29%2B%5Clambda+R%28f%29)= \frac{1}{m} \sum_{i=1}^{m}L(f(x),y)+\lambda R(f)"></p>
+<p>其中，第 1 项是<strong>经验风险</strong>，第 2 项是<strong>正则项</strong>， <img src="http://www.zhihu.com/equation?tex=%CE%BB%E2%89%A50" alt="λ≥0"> 为调整两者之间关系的系数。</p>
+<p>第 1 项的经验风险较小的模型可能较复杂（有多个非零参数），这时第 2 项的模型复杂度会较大。</p>
+<p>常见的有正则项有 <strong>L1 正则</strong> 和 <strong>L2 正则</strong> ，其中 <strong>L2 正则</strong> 的控制过拟合的效果比 <strong>L1 正则</strong> 的好。</p>
+<p><strong>正则化的作用是选择经验风险与模型复杂度同时较小的模型</strong>。 <img src="http://www.zhihu.com/equation?tex=%5E%7B%5B3%5D%7D" alt="^{[3]}"></p>
+<p>常见的有正则项有 <strong>L1 正则</strong> 和 <strong>L2 正则</strong> 以及 <strong>Dropout</strong> ，其中 <strong>L2 正则</strong> 的控制过拟合的效果比 <strong>L1 正则</strong> 的好。</p>
+<h2 id="范数"><a href="#范数" class="headerlink" title=" 范数"></a><img src="http://www.zhihu.com/equation?tex=L_%7Bp%7D" alt="L_{p}"> <strong>范数</strong></h2><p>为什么叫 L1 正则，有 L1、L2 正则 那么有没有 L3、L4 之类的呢？</p>
+<p>首先我们补一补课， <img src="http://www.zhihu.com/equation?tex=L_%7Bp%7D" alt="L_{p}"> 正则的 L 是指 <img src="http://www.zhihu.com/equation?tex=L_%7Bp%7D" alt="L_{p}"> 范数，其定义为：</p>
+<p><img src="http://www.zhihu.com/equation?tex=L_%7B0%7D" alt="L_{0}"> 范数： <img src="http://www.zhihu.com/equation?tex=%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7B0%7D+%3D+%5C%23%28i%29%5C+with+%5C+x_%7Bi%7D+%5Cneq+0" alt="\left \| w \right \|_{0} = \#(i)\ with \ x_{i} \neq 0"> <em>（非零元素的个数）</em></p>
+<p><img src="http://www.zhihu.com/equation?tex=L_%7B1%7D" alt="L_{1}"> 范数： <img src="http://www.zhihu.com/equation?tex=%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7B1%7D+%3D+%5Csum_%7Bi+%3D+1%7D%5E%7Bd%7D%5Clvert+x_i%5Crvert" alt="\left \| w \right \|_{1} = \sum_{i = 1}^{d}\lvert x_i\rvert"> <em>（每个元素绝对值之和）</em></p>
+<p><img src="http://www.zhihu.com/equation?tex=L_%7B2%7D" alt="L_{2}"> 范数： <img src="http://www.zhihu.com/equation?tex=%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7B2%7D+%3D+%5CBigl%28%5Csum_%7Bi+%3D+1%7D%5E%7Bd%7D+x_i%5E2%5CBigr%29%5E%7B1%2F2%7D" alt="\left \| w \right \|_{2} = \Bigl(\sum_{i = 1}^{d} x_i^2\Bigr)^{1/2}"> <em>（欧氏距离）</em></p>
+<p><img src="http://www.zhihu.com/equation?tex=L_%7Bp%7D" alt="L_{p}"> 范数： <img src="http://www.zhihu.com/equation?tex=%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7Bp%7D+%3D+%5CBigl%28%5Csum_%7Bi+%3D+1%7D%5E%7Bd%7D+x_i%5Ep%5CBigr%29%5E%7B1%2Fp%7D" alt="\left \| w \right \|_{p} = \Bigl(\sum_{i = 1}^{d} x_i^p\Bigr)^{1/p}"></p>
+<p>在机器学习中，若使用了 <img src="http://www.zhihu.com/equation?tex=%5ClVert+w%5CrVert_p" alt="\lVert w\rVert_p"> 作为正则项，我们则说该机器学习任务<strong>引入了</strong> <img src="http://www.zhihu.com/equation?tex=L_%7Bp%7D" alt="L_{p}"> <strong>正则项</strong>。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxqdn8qrvzj30k00j5aaz.jpg" alt="img"></p>
+<p><em>上图来自周志华老师的《机器学习》插图</em></p>
+<h2 id="L1-正则-Lasso-regularizer"><a href="#L1-正则-Lasso-regularizer" class="headerlink" title="L1 正则 Lasso regularizer"></a><strong>L1 正则 Lasso regularizer</strong></h2><p><img src="http://www.zhihu.com/equation?tex=J%28w%2Cb%29%3D%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7DL%28%5Chat%7By%7D%2Cy%29%2B%5Cfrac%7B%5Clambda+%7D%7Bm%7D%5Cleft+%5C%7C+w+%5Cright+%5C%7C_%7B1%7D" alt="J(w,b)=\frac{1}{m} \sum_{i=1}^{m}L(\hat{y},y)+\frac{\lambda }{m}\left \| w \right \|_{1}"></p>
+<ul>
+<li>凸函数，不是处处可微分</li>
+<li>得到的是稀疏解（最优解常出现在顶点上，且顶点上的 w 只有很少的元素是非零的）</li>
+</ul>
+<h2 id="L2-正则-Ridge-Regularizer-Weight-Decay"><a href="#L2-正则-Ridge-Regularizer-Weight-Decay" class="headerlink" title="L2 正则 Ridge Regularizer / Weight Decay"></a><strong>L2 正则 Ridge Regularizer / Weight Decay</strong></h2><p><img src="http://www.zhihu.com/equation?tex=J%28w%2Cb%29%3D%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi%3D1%7D%5E%7Bm%7DL%28%5Chat%7By%7D%2Cy%29%2B%5Cfrac%7B%5Clambda+%7D%7B2m%7D%5Cleft+%5C%7C+w+%5Cright+%5C%7C%5E%7B2%7D_%7B2%7D" alt="J(w,b)=\frac{1}{m} \sum_{i=1}^{m}L(\hat{y},y)+\frac{\lambda }{2m}\left \| w \right \|^{2}_{2}"></p>
+<ul>
+<li>凸函数，处处可微分</li>
+<li>易于优化</li>
+</ul>
+<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a><strong>Dropout</strong></h2><p><strong>Dropout 主要用于神经网络，其原理是使神经网络中的某些神经元随机失活，让模型不过度依赖某一神经元，达到增强模型鲁棒性以及控制过拟合的效果。</strong></p>
+<p>除此之外，Dropout 还有多模型投票等功能，若有兴趣可以拜读<a href="http://link.zhihu.com/?target=https%3A//www.cs.toronto.edu/%7Ehinton/absps/JMLRdropout.pdf" target="_blank" rel="noopener">这篇论文</a><strong>。</strong></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxqdnb7i3kj30k009q0tp.jpg" alt="img"></p>
+<h2 id="0x04-Reference"><a href="#0x04-Reference" class="headerlink" title="0x04 Reference"></a><strong>0x04 Reference</strong></h2><p>[1] LeCun, Y., Bottou, L., Orr, G., and Muller, K. Efficient backprop. In Orr, G. and K., Muller (eds.), Neural Net-works: Tricks of the trade. Springer, 1998b.</p>
+<p>[2] Sergey Ioffe, Christian Szegedy, “Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift”, arXiv preprint arXiv:1502.03167, 2015.</p>
+<p>[3] 李航. 统计方法学 P13-14</p>
+<p>[4] 聊聊机器学习中的损失函数 <a href="http://link.zhihu.com/?target=http%3A//kubicode.me/2016/04/11/Machine%2520Learning/Say-About-Loss-Function/" target="_blank" rel="noopener">http://kubicode.me/2016/04/11/Machine%20Learning/Say-About-Loss-Function/</a></p>
+<p>[5] Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever and Ruslan Salakhutdinov, “Dropout: A Simple Way to Prevent Neural Networks from<br>Overfitting”,</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/11/quantum/" rel="next" title="量子计算简述 - intro">
+                <i class="fa fa-chevron-left"></i> 量子计算简述 - intro
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/NonLocalNN/" rel="prev" title="NonLocal Neural Network备忘">
+                NonLocal Neural Network备忘 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ben Tseng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ML-入门：归一化、标准化和正则化"><span class="nav-number">1.</span> <span class="nav-text">ML 入门：归一化、标准化和正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-归一化-Normalization"><span class="nav-number">1.1.</span> <span class="nav-text">0x01 归一化 Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Min-Max-归一化"><span class="nav-number">1.2.</span> <span class="nav-text">Min-Max 归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-标准化-Normalization"><span class="nav-number">1.3.</span> <span class="nav-text">0x02 标准化 Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Z-Score-标准化"><span class="nav-number">1.4.</span> <span class="nav-text">Z-Score 标准化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">1.5.</span> <span class="nav-text">Batch Normalization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-正则化-Regularization"><span class="nav-number">1.6.</span> <span class="nav-text">0x03 正则化 Regularization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#范数"><span class="nav-number">1.7.</span> <span class="nav-text"> 范数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L1-正则-Lasso-regularizer"><span class="nav-number">1.8.</span> <span class="nav-text">L1 正则 Lasso regularizer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L2-正则-Ridge-Regularizer-Weight-Decay"><span class="nav-number">1.9.</span> <span class="nav-text">L2 正则 Ridge Regularizer / Weight Decay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout"><span class="nav-number">1.10.</span> <span class="nav-text">Dropout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Reference"><span class="nav-number">1.11.</span> <span class="nav-text">0x04 Reference</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Tseng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+</body>
+</html>

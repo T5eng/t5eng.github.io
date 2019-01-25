@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Quantum," />
+  <meta name="keywords" content="ML," />
 
 
 
@@ -79,18 +79,28 @@
 
 
 
-<meta name="description" content="以下内容基于课堂理解 量子计算发展史1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。 1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。 1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。 1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。 2001年，IBM使用">
-<meta name="keywords" content="Quantum">
+<meta name="description" content="论文简介论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。 intro对于序列数据（语音），long distance dependency是建立在递归操作上（如LSTM）；对于图像，long distance dependency是建立在由多层卷积操">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="量子计算简述 - intro">
-<meta property="og:url" content="http://yoursite.com/2018/10/11/quantum/index.html">
+<meta property="og:title" content="NonLocal Neural Network备忘">
+<meta property="og:url" content="http://yoursite.com/2019/01/14/NonLocalNN/index.html">
 <meta property="og:site_name" content="T5eng&#39;s Blog">
-<meta property="og:description" content="以下内容基于课堂理解 量子计算发展史1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。 1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。 1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。 1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。 2001年，IBM使用">
+<meta property="og:description" content="论文简介论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。 intro对于序列数据（语音），long distance dependency是建立在递归操作上（如LSTM）；对于图像，long distance dependency是建立在由多层卷积操">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-11T15:30:37.384Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fz6al6308zj30aw02yq2z.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fz6at4op14j306a01cq2u.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fz6cdpqjycj30ac05mmxr.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fz6ce2i8alj308c05cwew.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fz6ceoivjdj309u084dgn.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fz6cg74a0dj30ao084wfe.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fz6cgzurvgj30fa04gq3k.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fz7vcqbqikj30cu07i0tf.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fz7v4v0st0j30ck06s74x.jpg">
+<meta property="og:updated_time" content="2019-01-15T19:16:45.006Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="量子计算简述 - intro">
-<meta name="twitter:description" content="以下内容基于课堂理解 量子计算发展史1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。 1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。 1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。 1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。 2001年，IBM使用">
+<meta name="twitter:title" content="NonLocal Neural Network备忘">
+<meta name="twitter:description" content="论文简介论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。 intro对于序列数据（语音），long distance dependency是建立在递归操作上（如LSTM）；对于图像，long distance dependency是建立在由多层卷积操">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fz6al6308zj30aw02yq2z.jpg">
 
 
 
@@ -120,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/11/quantum/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/14/NonLocalNN/"/>
 
 
 
 
 
-  <title>量子计算简述 - intro | T5eng's Blog</title>
+  <title>NonLocal Neural Network备忘 | T5eng's Blog</title>
   
 
 
@@ -233,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/11/quantum/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/NonLocalNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Tseng">
@@ -250,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">量子计算简述 - intro</h1>
+          <h1 class="post-title" itemprop="name headline">NonLocal Neural Network备忘</h1>
         
 
         <div class="post-meta">
@@ -262,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-11T14:52:00+03:00">
-                2018-10-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-14T14:38:00+03:00">
+                2019-01-14
               </time>
             
 
@@ -300,36 +310,47 @@
       
 
       
-        <p>以下内容基于课堂理解</p>
-<h2 id="量子计算发展史"><a href="#量子计算发展史" class="headerlink" title="量子计算发展史"></a>量子计算发展史</h2><p>1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。</p>
-<p>1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。</p>
-<p>1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。</p>
-<p>1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。</p>
-<p>2001年，IBM使用7个量子比特的计算器，用Shor算法实现15分解成3x5.</p>
-<p>2018年，IBM实现50量子比特的处理器原型。掌握50量子比特计算机成熟技术的国家将实现“量子霸权”（Quantum Computational Supremacy）。</p>
-<h2 id="量子位和量子寄存器"><a href="#量子位和量子寄存器" class="headerlink" title="量子位和量子寄存器"></a>量子位和量子寄存器</h2><p>相较于传统计算机，量子机定义了“<strong>量子位</strong>”（Qubit）。Qubit可以像传统计算机一样处于“0”态或“1”态，也可以处于<strong>叠加态</strong>。在量子力学中用狄拉克符号表示一个Qubit:</p>
-<script type="math/tex; mode=display">
-| \psi \rangle = a * | 0 \rangle + b* | 1 \rangle</script><p>其中：|0&gt;与|1&gt;为<strong>基本态</strong>；a,b为<strong>概率幅</strong>，且有：</p>
-<script type="math/tex; mode=display">
-|a|^2+|b|^2=1</script><p>对于2个Qubit组成的<strong>希尔伯特(Hilbert)空间</strong>，会具有4个基本态，其叠加态为：</p>
-<script type="math/tex; mode=display">
-| \psi \rangle = a_{00}   * |00 \rangle + a_{01}   * |01 \rangle + a_{10}   * |10 \rangle + a_{11}   * |11 \rangle</script><p>其中各参数定义与单Qubit情况类似。</p>
-<p>推广到N位Qubit可知，将具有2^n种相互正交的基本态，因此量子寄存器位数的<strong>线性增长</strong>将实现量子寄存器容量的<strong>指数增长</strong>。</p>
-<h2 id="量子逻辑门"><a href="#量子逻辑门" class="headerlink" title="量子逻辑门"></a>量子逻辑门</h2><p>个人理解，Qubit的计算可以参考线性代数。</p>
-<p>对量子寄存器叠加态进行变换（幺正变换）以实现逻辑功能的操作，称为<strong>量子逻辑门</strong>。</p>
-<p>常见的量子逻辑门包括：CNOT门、Hadamard门、Pauli X/Y/Z门、相位门、π/8门、量子旋转门</p>
-<p>叠加态的量子比特在多维空间上进行线性变换（量子学称为<strong>幺正变换</strong>）：将叠加态左乘一个<strong>幺正矩阵</strong>（量子逻辑门），可以同时对叠加态中所有Qubit进行变换，因此量子计算具有并行性。即对量子寄存器进行一次幺正变换，相当于传统计算机进行2^n次运算。</p>
-<p>而传统计算机由于部分计算是串行的，因此不可能通过无限增加处理器数量达到100%并行。</p>
-<h2 id="量子测量与输出"><a href="#量子测量与输出" class="headerlink" title="量子测量与输出"></a>量子测量与输出</h2><p>对叠加态量子体系的测量将造成波函数的坍缩，使叠加态转化为基态。即n位的量子寄存器叠加保存了2^n个二进制数，但输出结果只能为n位的二进制数。</p>
-<p>如n=2的情况：</p>
-<script type="math/tex; mode=display">
-| \psi \rangle = a_{00}   * |00 \rangle + a_{01}   * |01 \rangle + a_{10}   * |10 \rangle + a_{11}   * |11 \rangle</script><p>测量后，量子体系将会坍缩到|00&gt;、|01&gt;、|10&gt;、|11&gt;四种状态之一，且坍缩的过程是随机的。因此量子计算的目的就是设计量子算法（通过幺正变换），使所需要的结果的概率尽可能大，不需要的结果的概率尽可能小。</p>
-<p>对于多量子体系，各个量子的测量是相对独立的，且符合统计原理的。</p>
-<p>例如，对第一个Qubit的测量结果为0的概率为：</p>
-<script type="math/tex; mode=display">
-P_{|00 \rangle + |01 \rangle} =  |a_{00}|^2 + |a_{01}|^2</script><p>若测量得知第一个Qubit结果为0，此时测量第二个Qubit概率分布应为：</p>
-<script type="math/tex; mode=display">
-P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
+        <h2 id="论文简介"><a href="#论文简介" class="headerlink" title="论文简介"></a>论文简介</h2><p>论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。</p>
+<h2 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h2><p>对于序列数据（语音），long distance dependency是建立在递归操作上（如LSTM）；对于图像，long distance dependency是建立在由多层卷积操作建立的大感受域上的。</p>
+<p>卷积和递归都是基于当前邻域，实现long distance dependency必须反复遍历数据。计算方式低效，训练困难，信息不容易实现双向传递。</p>
+<p>跟self-attention有点关系，每个局部的输出都考虑了全局的加权平均值（self-attention是在embedding空间中计算的，该论文提出的Transformer模型革了RNN的命）。</p>
+<p>我们的网络表现很牛，而且可以作为一个基础模块，插入到已有网络中。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fz6al6308zj30aw02yq2z.jpg" alt="image-20190114133153895"></p>
+<p><strong>yi</strong>为NonLocal mean输出</p>
+<p><strong>i</strong>为当前计算点index</p>
+<p><strong>j</strong>为全局所有计算点index</p>
+<p><strong>f(xi,xj)</strong>计算2点之间相似程度（paper提供了4种方式：Gaussian, Embedded Gaussian, Dot Product, Concatenation)</p>
+<p><strong>g(xj)</strong>为j点的response值</p>
+<p>C(x)为归一化值（取任给j，f(xi,xj)的和）</p>
+<h2 id="NonLocal-Block"><a href="#NonLocal-Block" class="headerlink" title="NonLocal Block"></a>NonLocal Block</h2><p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fz6at4op14j306a01cq2u.jpg" alt="image-20190114133936809"></p>
+<p><strong>yi</strong>为NonLocal mean输出</p>
+<p><strong>Wz</strong>为NL层的可训练权重</p>
+<p><strong>xi</strong>作为残差连接，将Wz初始化为0时，则可以插入到已有模型中且不影响模型结果。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>基于ResNet50的Conv2D和Inflate3D版本，对比插入1、5、10个NonLocal Block之后的表现。</p>
+<p>C2D可以直接用ResNet50的预训练权重；I3D可以将卷积核的每片都用2D的版本初始化然后除以t（t为inflate的倍数）</p>
+<p>因为Inflate3D计算量比较大，因此每2个resBlock才inflate一个。</p>
+<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p>采用Embedded Gaussian计算NonLocal Mean时通道数选为输入通道的一半，再加一层pooling可以进一步降低计算量到1/4</p>
+<p>数据画面随机剪裁，从连续的64帧中随机截选<strong>32帧</strong>作为一组</p>
+<p>8GPU，每个GPU计算8组，相当于一个mini-batch有62组数据</p>
+<p>训练400k轮，lr=0.01，每150k减少一个数量级</p>
+<p>opt用momentum=0.9，weight decay=0.0001，在最后的global pooling layer用0.5的dropout</p>
+<p>在每个NonLocal Block的最后一层1x1x1中使用BatchNorm，并且该层权重初始化为0，保证可以插入到任意已训练的网络结构中</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fz6cdpqjycj30ac05mmxr.jpg" alt="image-20190114143358883"></p>
+<p>4种NonLocal Weight计算方法效果接近。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fz6ce2i8alj308c05cwew.jpg" alt="image-20190114143420341"></p>
+<p>将1个NonLocal Block加到不同位置，效果接近</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fz6ceoivjdj309u084dgn.jpg" alt="image-20190114143455820"></p>
+<p>更深的网络也可以用NonLocal Block进一步提高表现（ResNet101）</p>
+<p>NonLocal的提升也不仅仅是因为深度增加了（R50 + 5-block &gt; R101 base）</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fz6cg74a0dj30ao084wfe.jpg" alt="image-20190114143622712"></p>
+<p>NonLocal考虑space&amp;time时效果最好（计算量更大？）</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fz6cgzurvgj30fa04gq3k.jpg" alt="image-20190114143709720"></p>
+<p>对比I3D，减少了计算量，提高了效果</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fz7vcqbqikj30cu07i0tf.jpg" alt="image-20190115221557322"></p>
+<p>对比C2D、Inflate3D和NonLocal Inflate3D的表现。NonLocal可以与conv3D互补，得到更好表现</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fz7v4v0st0j30ck06s74x.jpg" alt="image-20190115220819622"></p>
+<p>用128帧一组数据，效果更好（计算量翻4倍？）基于32帧的训练模型进行训练，lr=0.0025。在更长的数据中，NLI3D相比I3D也仍然有提升。</p>
+
       
     </div>
     
@@ -346,7 +367,7 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
       
         <div class="post-tags">
           
-            <a href="/tags/Quantum/" rel="tag"># Quantum</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
           
         </div>
       
@@ -359,8 +380,8 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/12/mobile_net/" rel="next" title="MobileNet概览">
-                <i class="fa fa-chevron-left"></i> MobileNet概览
+              <a href="/2018/11/30/Norm_Reg_/" rel="next" title="ML 入门：归一化、标准化和正则化">
+                <i class="fa fa-chevron-left"></i> ML 入门：归一化、标准化和正则化
               </a>
             
           </div>
@@ -369,8 +390,8 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/30/Norm_Reg_/" rel="prev" title="ML 入门：归一化、标准化和正则化">
-                ML 入门：归一化、标准化和正则化 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/17/imreadComparison/" rel="prev" title="CV Preprocess Library对比">
+                CV Preprocess Library对比 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -494,7 +515,7 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#量子计算发展史"><span class="nav-number">1.</span> <span class="nav-text">量子计算发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子位和量子寄存器"><span class="nav-number">2.</span> <span class="nav-text">量子位和量子寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子逻辑门"><span class="nav-number">3.</span> <span class="nav-text">量子逻辑门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子测量与输出"><span class="nav-number">4.</span> <span class="nav-text">量子测量与输出</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#论文简介"><span class="nav-number">1.</span> <span class="nav-text">论文简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intro"><span class="nav-number">2.</span> <span class="nav-text">intro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">3.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NonLocal-Block"><span class="nav-number">4.</span> <span class="nav-text">NonLocal Block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">5.</span> <span class="nav-text">实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trick"><span class="nav-number">6.</span> <span class="nav-text">Trick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验结果"><span class="nav-number">7.</span> <span class="nav-text">实验结果</span></a></li></ol></div>
             
 
           </div>
@@ -701,26 +722,6 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

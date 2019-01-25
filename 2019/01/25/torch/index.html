@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Quantum," />
+  <meta name="keywords" content="ML," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="以下内容基于课堂理解 量子计算发展史1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。 1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。 1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。 1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。 2001年，IBM使用">
-<meta name="keywords" content="Quantum">
+<meta name="description" content="Checkpoint &amp;amp; Loading123# 保存和加载整个模型 torch.save(model_object, &apos;model.pkl&apos;) model = torch.load(&apos;model.pkl&apos;) 123# 仅保存和加载模型参数(推荐使用) torch.save(model_object.state_dict(), &apos;params.pkl&apos;) model_object.load">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="量子计算简述 - intro">
-<meta property="og:url" content="http://yoursite.com/2018/10/11/quantum/index.html">
+<meta property="og:title" content="PyTorch 常用api (不定期更新)">
+<meta property="og:url" content="http://yoursite.com/2019/01/25/torch/index.html">
 <meta property="og:site_name" content="T5eng&#39;s Blog">
-<meta property="og:description" content="以下内容基于课堂理解 量子计算发展史1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。 1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。 1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。 1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。 2001年，IBM使用">
+<meta property="og:description" content="Checkpoint &amp;amp; Loading123# 保存和加载整个模型 torch.save(model_object, &apos;model.pkl&apos;) model = torch.load(&apos;model.pkl&apos;) 123# 仅保存和加载模型参数(推荐使用) torch.save(model_object.state_dict(), &apos;params.pkl&apos;) model_object.load">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-11T15:30:37.384Z">
+<meta property="og:updated_time" content="2019-01-25T19:08:56.431Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="量子计算简述 - intro">
-<meta name="twitter:description" content="以下内容基于课堂理解 量子计算发展史1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。 1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。 1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。 1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。 2001年，IBM使用">
+<meta name="twitter:title" content="PyTorch 常用api (不定期更新)">
+<meta name="twitter:description" content="Checkpoint &amp;amp; Loading123# 保存和加载整个模型 torch.save(model_object, &apos;model.pkl&apos;) model = torch.load(&apos;model.pkl&apos;) 123# 仅保存和加载模型参数(推荐使用) torch.save(model_object.state_dict(), &apos;params.pkl&apos;) model_object.load">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/11/quantum/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/25/torch/"/>
 
 
 
 
 
-  <title>量子计算简述 - intro | T5eng's Blog</title>
+  <title>PyTorch 常用api (不定期更新) | T5eng's Blog</title>
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/11/quantum/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/torch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Tseng">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">量子计算简述 - intro</h1>
+          <h1 class="post-title" itemprop="name headline">PyTorch 常用api (不定期更新)</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-11T14:52:00+03:00">
-                2018-10-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T22:01:00+03:00">
+                2019-01-25
               </time>
             
 
@@ -300,36 +300,19 @@
       
 
       
-        <p>以下内容基于课堂理解</p>
-<h2 id="量子计算发展史"><a href="#量子计算发展史" class="headerlink" title="量子计算发展史"></a>量子计算发展史</h2><p>1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。</p>
-<p>1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。</p>
-<p>1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。</p>
-<p>1995年，Grover提出在一个无序的数据库中搜索的问题，可以用量子计算机快速解决。</p>
-<p>2001年，IBM使用7个量子比特的计算器，用Shor算法实现15分解成3x5.</p>
-<p>2018年，IBM实现50量子比特的处理器原型。掌握50量子比特计算机成熟技术的国家将实现“量子霸权”（Quantum Computational Supremacy）。</p>
-<h2 id="量子位和量子寄存器"><a href="#量子位和量子寄存器" class="headerlink" title="量子位和量子寄存器"></a>量子位和量子寄存器</h2><p>相较于传统计算机，量子机定义了“<strong>量子位</strong>”（Qubit）。Qubit可以像传统计算机一样处于“0”态或“1”态，也可以处于<strong>叠加态</strong>。在量子力学中用狄拉克符号表示一个Qubit:</p>
-<script type="math/tex; mode=display">
-| \psi \rangle = a * | 0 \rangle + b* | 1 \rangle</script><p>其中：|0&gt;与|1&gt;为<strong>基本态</strong>；a,b为<strong>概率幅</strong>，且有：</p>
-<script type="math/tex; mode=display">
-|a|^2+|b|^2=1</script><p>对于2个Qubit组成的<strong>希尔伯特(Hilbert)空间</strong>，会具有4个基本态，其叠加态为：</p>
-<script type="math/tex; mode=display">
-| \psi \rangle = a_{00}   * |00 \rangle + a_{01}   * |01 \rangle + a_{10}   * |10 \rangle + a_{11}   * |11 \rangle</script><p>其中各参数定义与单Qubit情况类似。</p>
-<p>推广到N位Qubit可知，将具有2^n种相互正交的基本态，因此量子寄存器位数的<strong>线性增长</strong>将实现量子寄存器容量的<strong>指数增长</strong>。</p>
-<h2 id="量子逻辑门"><a href="#量子逻辑门" class="headerlink" title="量子逻辑门"></a>量子逻辑门</h2><p>个人理解，Qubit的计算可以参考线性代数。</p>
-<p>对量子寄存器叠加态进行变换（幺正变换）以实现逻辑功能的操作，称为<strong>量子逻辑门</strong>。</p>
-<p>常见的量子逻辑门包括：CNOT门、Hadamard门、Pauli X/Y/Z门、相位门、π/8门、量子旋转门</p>
-<p>叠加态的量子比特在多维空间上进行线性变换（量子学称为<strong>幺正变换</strong>）：将叠加态左乘一个<strong>幺正矩阵</strong>（量子逻辑门），可以同时对叠加态中所有Qubit进行变换，因此量子计算具有并行性。即对量子寄存器进行一次幺正变换，相当于传统计算机进行2^n次运算。</p>
-<p>而传统计算机由于部分计算是串行的，因此不可能通过无限增加处理器数量达到100%并行。</p>
-<h2 id="量子测量与输出"><a href="#量子测量与输出" class="headerlink" title="量子测量与输出"></a>量子测量与输出</h2><p>对叠加态量子体系的测量将造成波函数的坍缩，使叠加态转化为基态。即n位的量子寄存器叠加保存了2^n个二进制数，但输出结果只能为n位的二进制数。</p>
-<p>如n=2的情况：</p>
-<script type="math/tex; mode=display">
-| \psi \rangle = a_{00}   * |00 \rangle + a_{01}   * |01 \rangle + a_{10}   * |10 \rangle + a_{11}   * |11 \rangle</script><p>测量后，量子体系将会坍缩到|00&gt;、|01&gt;、|10&gt;、|11&gt;四种状态之一，且坍缩的过程是随机的。因此量子计算的目的就是设计量子算法（通过幺正变换），使所需要的结果的概率尽可能大，不需要的结果的概率尽可能小。</p>
-<p>对于多量子体系，各个量子的测量是相对独立的，且符合统计原理的。</p>
-<p>例如，对第一个Qubit的测量结果为0的概率为：</p>
-<script type="math/tex; mode=display">
-P_{|00 \rangle + |01 \rangle} =  |a_{00}|^2 + |a_{01}|^2</script><p>若测量得知第一个Qubit结果为0，此时测量第二个Qubit概率分布应为：</p>
-<script type="math/tex; mode=display">
-P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
+        <h1 id="Checkpoint-amp-Loading"><a href="#Checkpoint-amp-Loading" class="headerlink" title="Checkpoint &amp; Loading"></a>Checkpoint &amp; Loading</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存和加载整个模型 </span></span><br><span class="line">torch.save(model_object, <span class="string">'model.pkl'</span>) </span><br><span class="line">model = torch.load(<span class="string">'model.pkl'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅保存和加载模型参数(推荐使用) </span></span><br><span class="line">torch.save(model_object.state_dict(), <span class="string">'params.pkl'</span>) </span><br><span class="line">model_object.load_state_dict(torch.load(<span class="string">'params.pkl'</span>))</span><br></pre></td></tr></table></figure>
+<h1 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h1><p>参数的初始化其实就是对参数赋值。而我们需要学习的参数其实都是Variable，它其实是对Tensor的封装，同时提供了data，grad等接口，这就意味着我们可以直接对这些参数进行操作赋值了。这就是PyTorch简洁高效所在。 </p>
+<p>所以我们可以进行如下操作进行初始化，当然其实有其他的方法，但是这种方法是PyTorch作者所推崇的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def weight_init(m):</span><br><span class="line"># 使用isinstance来判断m属于什么类型</span><br><span class="line">    if isinstance(m, nn.Conv2d):</span><br><span class="line">        n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels</span><br><span class="line">        m.weight.data.normal_(0, math.sqrt(2. / n))</span><br><span class="line">    elif isinstance(m, nn.BatchNorm2d):</span><br><span class="line"># m中的weight，bias其实都是Variable，为了能学习参数以及后向传播</span><br><span class="line">        m.weight.data.fill_(1)</span><br><span class="line">        m.bias.data.zero_()</span><br></pre></td></tr></table></figure>
+<p>另一种常见的初始化方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nn.init.kaiming_normal(self.W.weight)</span><br><span class="line">nn.init.constant(self.W[<span class="number">0</span>].bias, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><h2 id="局部微调"><a href="#局部微调" class="headerlink" title="局部微调"></a>局部微调</h2><p>有时候我们加载了训练模型后，只想调节最后的几层，其他层不训练。其实不训练也就意味着不进行梯度计算，PyTorch中提供的requires_grad使得对训练的控制变得非常简单。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">model = torchvision.models.resnet18(pretrained=True)</span><br><span class="line">for param in model.parameters():</span><br><span class="line">    param.requires_grad = False</span><br><span class="line"># 替换最后的全连接层， 改为训练100类</span><br><span class="line"># 新构造的模块的参数默认requires_grad为True</span><br><span class="line">model.fc = nn.Linear(512, 100)</span><br><span class="line"></span><br><span class="line"># 只优化最后的分类层</span><br><span class="line">optimizer = optim.SGD(model.fc.parameters(), lr=1e-2, momentum=0.9)</span><br></pre></td></tr></table></figure>
+<h2 id="全局微调"><a href="#全局微调" class="headerlink" title="全局微调"></a>全局微调</h2><p>有时候我们需要对全局都进行finetune，只不过我们希望改换过的层和其他层的学习速率不一样，这时候我们可以把其他层和新层在optimizer中单独赋予不同的学习速率。比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ignored_params = list(map(id, model.fc.parameters()))</span><br><span class="line">base_params = filter(<span class="keyword">lambda</span> p: id(p) <span class="keyword">not</span> <span class="keyword">in</span> ignored_params,</span><br><span class="line">                     model.parameters())</span><br><span class="line"></span><br><span class="line">optimizer = torch.optim.SGD([</span><br><span class="line">            &#123;<span class="string">'params'</span>: base_params&#125;,</span><br><span class="line">            &#123;<span class="string">'params'</span>: model.fc.parameters(), <span class="string">'lr'</span>: <span class="number">1e-2</span>&#125;</span><br><span class="line">            ], lr=<span class="number">1e-3</span>, momentum=<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
+<p>其中base_params使用1e-3来训练，model.fc.parameters使用1e-2来训练，momentum是二者共有的。</p>
+
       
     </div>
     
@@ -346,7 +329,7 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
       
         <div class="post-tags">
           
-            <a href="/tags/Quantum/" rel="tag"># Quantum</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
           
         </div>
       
@@ -359,8 +342,8 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/12/mobile_net/" rel="next" title="MobileNet概览">
-                <i class="fa fa-chevron-left"></i> MobileNet概览
+              <a href="/2019/01/17/imreadComparison/" rel="next" title="CV Preprocess Library对比">
+                <i class="fa fa-chevron-left"></i> CV Preprocess Library对比
               </a>
             
           </div>
@@ -369,8 +352,8 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/30/Norm_Reg_/" rel="prev" title="ML 入门：归一化、标准化和正则化">
-                ML 入门：归一化、标准化和正则化 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/25/tfrecord/" rel="prev" title="tfRecord 搬运">
+                tfRecord 搬运 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -494,7 +477,7 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#量子计算发展史"><span class="nav-number">1.</span> <span class="nav-text">量子计算发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子位和量子寄存器"><span class="nav-number">2.</span> <span class="nav-text">量子位和量子寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子逻辑门"><span class="nav-number">3.</span> <span class="nav-text">量子逻辑门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量子测量与输出"><span class="nav-number">4.</span> <span class="nav-text">量子测量与输出</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Checkpoint-amp-Loading"><span class="nav-number">1.</span> <span class="nav-text">Checkpoint &amp; Loading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialization"><span class="nav-number">2.</span> <span class="nav-text">Initialization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimization"><span class="nav-number">3.</span> <span class="nav-text">Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#局部微调"><span class="nav-number">3.1.</span> <span class="nav-text">局部微调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局微调"><span class="nav-number">3.2.</span> <span class="nav-text">全局微调</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -701,26 +684,6 @@ P_{|00 \rangle} =   \dfrac{a_{00}}  {|a_{00}|^2 + |a_{01}|^2}</script>
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
