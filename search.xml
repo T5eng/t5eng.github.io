@@ -61,25 +61,6 @@
     
     
     <entry>
-      <title>CV Preprocess Library对比</title>
-      <link href="/2019/01/17/imreadComparison/"/>
-      <url>/2019/01/17/imreadComparison/</url>
-      
-        <content type="html"><![CDATA[<h3 id="PIL-Image-open"><a href="#PIL-Image-open" class="headerlink" title="PIL.Image.open"></a>PIL.Image.open</h3><p> scipy.misc.imread，scipy.ndimage.imread都调用PIL.Image.open，返回nparray，RGB格式，0-255</p><p>scipy.misc.imread可选mode</p><p>但是PIL.Image.open本身返回的不是nparray。</p><h3 id="cv2-imread"><a href="#cv2-imread" class="headerlink" title="cv2.imread"></a>cv2.imread</h3><p>返回nparray，BGR格式，0-255</p><h3 id="matplotlib-image-imread"><a href="#matplotlib-image-imread" class="headerlink" title="matplotlib.image.imread"></a>matplotlib.image.imread</h3><p>返回nparray，RGB格式，0-255</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> ML </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>NonLocal Neural Network备忘</title>
       <link href="/2019/01/14/NonLocalNN/"/>
       <url>/2019/01/14/NonLocalNN/</url>
