@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="以下内容基于网络搬运及个人踩坑总结 环境配置 前端工具Node.js - 用于生成静态页面 1$ brew install nod 没有homebrew的话在Terminal键入： 1$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/in stall)&quot;  前端工具npm - Node">
+<meta name="description" content="总结一下这两天在macOS上装OpenCV的血泪史  Requirement Xcode VScode OpenCV官网下载最新版source file brew install cmake  编译OpenCV的source filecd到opencv-4.0.1文件夹下（目前最新版是4.0.1） mkdir build用于存放后面生成的文件 1234cd build cmake -D CMAKE">
 <meta name="keywords" content="日常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在macOS平台搭建基于Github Page的Hexo博客">
-<meta property="og:url" content="http://t5eng.github.io/2018/07/14/mac-github-hexo-blog/index.html">
+<meta property="og:title" content="在macOS安装OpenCV以及VScode的设置">
+<meta property="og:url" content="http://t5eng.github.io/2019/02/15/cv_vscode_mac_cpp/index.html">
 <meta property="og:site_name" content="T5eng&#39;s Blog">
-<meta property="og:description" content="以下内容基于网络搬运及个人踩坑总结 环境配置 前端工具Node.js - 用于生成静态页面 1$ brew install nod 没有homebrew的话在Terminal键入： 1$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/in stall)&quot;  前端工具npm - Node">
+<meta property="og:description" content="总结一下这两天在macOS上装OpenCV的血泪史  Requirement Xcode VScode OpenCV官网下载最新版source file brew install cmake  编译OpenCV的source filecd到opencv-4.0.1文件夹下（目前最新版是4.0.1） mkdir build用于存放后面生成的文件 1234cd build cmake -D CMAKE">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1ft9jyr6xrrj31kw0r50z5.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1ft9jz0hcr9j31kc0j2wis.jpg">
-<meta property="og:updated_time" content="2019-01-25T19:00:02.471Z">
+<meta property="og:updated_time" content="2019-02-15T20:23:02.731Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在macOS平台搭建基于Github Page的Hexo博客">
-<meta name="twitter:description" content="以下内容基于网络搬运及个人踩坑总结 环境配置 前端工具Node.js - 用于生成静态页面 1$ brew install nod 没有homebrew的话在Terminal键入： 1$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/in stall)&quot;  前端工具npm - Node">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1ft9jyr6xrrj31kw0r50z5.jpg">
+<meta name="twitter:title" content="在macOS安装OpenCV以及VScode的设置">
+<meta name="twitter:description" content="总结一下这两天在macOS上装OpenCV的血泪史  Requirement Xcode VScode OpenCV官网下载最新版source file brew install cmake  编译OpenCV的source filecd到opencv-4.0.1文件夹下（目前最新版是4.0.1） mkdir build用于存放后面生成的文件 1234cd build cmake -D CMAKE">
 
 
 
@@ -127,7 +124,7 @@
 
 
 
-  <title>在macOS平台搭建基于Github Page的Hexo博客 | T5eng's Blog</title>
+  <title>在macOS安装OpenCV以及VScode的设置 | T5eng's Blog</title>
   
 
 
@@ -254,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://t5eng.github.io/2018/07/14/mac-github-hexo-blog/">
+    <link itemprop="mainEntityOfPage" href="http://t5eng.github.io/2019/02/15/cv_vscode_mac_cpp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Tseng">
@@ -271,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">在macOS平台搭建基于Github Page的Hexo博客</h1>
+          <h1 class="post-title" itemprop="name headline">在macOS安装OpenCV以及VScode的设置</h1>
         
 
         <div class="post-meta">
@@ -283,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-14T18:16:06+03:00">
-                2018-07-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-15T19:00:00+03:00">
+                2019-02-15
               </time>
             
 
@@ -315,7 +312,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  461
+                  459
                 </span>
               
 
@@ -340,84 +337,34 @@
       
 
       
-        <p>以下内容基于网络搬运及个人踩坑总结</p>
-<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ol>
-<li><p>前端工具<strong>Node.js</strong> - 用于生成静态页面</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install nod</span><br></pre></td></tr></table></figure>
-<p>没有homebrew的话在Terminal键入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/in stall)</span>"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>前端工具<strong>npm</strong> - Node Package Manager</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Git</strong><br>  在Mac Store安装Xcode自带Git工具</p>
-<p>  otherwise, visit <a href="https://git-scm.com/download" target="_blank" rel="noopener">https://git-scm.com/download</a></p>
-</li>
+        <p>总结一下这两天在macOS上装OpenCV的血泪史</p>
+<hr>
+<h1 id="Requirement"><a href="#Requirement" class="headerlink" title="Requirement"></a>Requirement</h1><ol>
+<li>Xcode</li>
+<li>VScode</li>
+<li><a href="https://opencv.org/releases.html" target="_blank" rel="noopener">OpenCV官网</a>下载最新版source file</li>
+<li>brew install cmake</li>
 </ol>
-<ol start="4">
-<li><p><strong>Hexo</strong> - 博客框架，一键生成静态页</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g hexo</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><ol>
-<li><p>建立hexo目录，执行<code>hero init</code>命令：</p>
-</li>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br></pre></td></tr></table></figure>
-<p>hexo将自动下载框架至<code>folder</code>。</p>
-<p>初始化后<code>folder</code>中内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">_config.yml	</span><br><span class="line">db.json </span><br><span class="line">node_modules </span><br><span class="line">package.json</span><br><span class="line">scaffolds</span><br><span class="line">source</span><br><span class="line">themes</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="3">
-<li><p>开启hexo服务器：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>浏览器中打开网址<a href="http://0.0.0.0:4000/" target="_blank" rel="noopener">http://localhost:4000</a>，能看到hexo的hello world，则本地环境搭建成功。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1ft9jyr6xrrj31kw0r50z5.jpg" alt></p>
-</li>
-</ol>
-<h2 id="关联Github"><a href="#关联Github" class="headerlink" title="关联Github"></a>关联Github</h2><ol>
-<li><p>创建新的Github Repository作为github page的仓库：</p>
-<p>命名规则为：自定义.github.io</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1ft9jz0hcr9j31kc0j2wis.jpg" alt></p>
-</li>
-<li><p>打开<code>folder</code>中<code>_config.yml</code>  编辑最后一行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/user_name/自定义.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="3">
-<li><p>用hexo生成静态页：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>部署网页：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>若deploy出错，可能是未安装hexo deployer git</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>deploy成功会显示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Deploy <span class="keyword">done</span>: git</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="5">
-<li><p>首次运行要输入github账户密码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Username for &apos;https://github.com&apos;:</span><br><span class="line">Password for &apos;https://github.com&apos;:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>deploy执行后会将<code>folder</code>文件同步至Git Repo，根据网络状况可能上传失败，建议打开vpn。</p>
-<p>上传成功后打开<code>https://自定义.github.io</code>即可看到和打开<code>https://localhost:400</code>一样的Hello World。</p>
-</li>
-</ol>
-<h2 id="安装hexo主题"><a href="#安装hexo主题" class="headerlink" title="安装hexo主题"></a>安装hexo主题</h2><ol>
-<li><p><strong><a href="https://hexo.io/themes/" target="_blank" rel="noopener">hexo官网主题页</a></strong> 有大量第三方主题。下面以<strong>cactus</strong>为例。</p>
-</li>
-<li><p>在<code>folder</code>目录下执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/probberechts/hexo-theme-cactus.git themes/cactus</span><br></pre></td></tr></table></figure>
-<p>即可将主题下载到<code>themes</code>目录下<code>cactus</code>文件夹。</p>
-</li>
-<li><p>修改<code>folder</code>中<code>_config.yml</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># theme: landscape</span><br><span class="line">theme: cactus</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>保存<code>_config.yml</code>后重新执行<code>hexo generate</code>及<code>hexo deploy</code>即可将新主题的静态页部署在git上。</p>
-</li>
-</ol>
-
+<h1 id="编译OpenCV的source-file"><a href="#编译OpenCV的source-file" class="headerlink" title="编译OpenCV的source file"></a>编译OpenCV的source file</h1><p>cd到<code>opencv-4.0.1</code>文件夹下（目前最新版是4.0.1）</p>
+<p><code>mkdir build</code>用于存放后面生成的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> build </span><br><span class="line">cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/<span class="built_in">local</span> .. <span class="comment">#会生成一堆文件在build文件夹以及/usr/local文件夹</span></span><br><span class="line">make <span class="comment"># compile</span></span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>这时候OpenCV已经安装好了</p>
+<h1 id="VScode配置"><a href="#VScode配置" class="headerlink" title="VScode配置"></a>VScode配置</h1><p>Demo cpp如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"HEllo World!\n"</span>);</span><br><span class="line">    <span class="keyword">if</span> ( argc != <span class="number">2</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"usage: DisplayImage.out &lt;Image_Path&gt;\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">    Mat image = imread( argv[<span class="number">1</span>], <span class="number">1</span> );</span><br><span class="line">    <span class="keyword">if</span> ( !image.data )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"No image data \n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    namedWindow(<span class="string">"Display Image"</span>, WINDOW_AUTOSIZE );</span><br><span class="line">    imshow(<span class="string">"Display Image"</span>, image);</span><br><span class="line">    waitKey(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">std</span>::this_thread::sleep_for(<span class="built_in">std</span>::chrono::milliseconds(<span class="number">10000</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置c_cpp_properties.json：增加opencv安装位置的路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;includePath&quot;: [</span><br><span class="line">                &quot;$&#123;workspaceFolder&#125;/**&quot;,</span><br><span class="line">                &quot;/usr/local/include/opencv4&quot;</span><br><span class="line">            ]</span><br></pre></td></tr></table></figure>
+<p>这时候code里面就可以用opencv的代码提示了</p>
+<h1 id="用cmake-compile程序"><a href="#用cmake-compile程序" class="headerlink" title="用cmake compile程序"></a>用cmake compile程序</h1><p>在main.cpp所在目录新建一个文件<code>CMakeLists.txt</code>，指定编译时需要用的库</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION <span class="number">3.13</span><span class="number">.4</span>)</span><br><span class="line"><span class="built_in">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>) <span class="comment">//c++标准 cv4需要c11</span></span><br><span class="line"><span class="built_in">set</span>(CMAKE_CXX_STANDARD_REQUIRED ON)</span><br><span class="line">project( CV ) <span class="comment">//自定义project名称为CV</span></span><br><span class="line">find_package( OpenCV REQUIRED ) <span class="comment">//搜索opencv库</span></span><br><span class="line">include_directories( $&#123;OpenCV_INCLUDE_DIRS&#125; ) <span class="comment">//include opencv</span></span><br><span class="line">add_executable( CV main.cpp ) <span class="comment">//生成的可执行命令，自定义为CV</span></span><br><span class="line">target_link_libraries( CV $&#123;OpenCV_LIBS&#125; )</span><br></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir build <span class="comment">#可自定义</span></span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake ..</span><br></pre></td></tr></table></figure>
+<p>这时候已经vscode全部配置好了</p>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><p>cpp代码写好之后，在<code>build</code>文件夹里面执行<code>make</code>就会编译cpp文件了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-- Configuring <span class="keyword">done</span></span><br><span class="line">-- Generating <span class="keyword">done</span></span><br><span class="line">-- Build files have been written to: /Users/T5eng/Desktop/CV/build</span><br><span class="line">Scanning dependencies of target CV</span><br><span class="line">[ 50%] Building CXX object CMakeFiles/CV.dir/main.cpp.o</span><br><span class="line">[100%] Linking CXX executable CV</span><br><span class="line">[100%] Built target CV</span><br></pre></td></tr></table></figure>
+<p>这时候会生成一个可执行命令CV</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./CV &lt;image-path&gt;</span><br></pre></td></tr></table></figure>
+<p>如无意外，会输出一个hello world同时显示图片。</p>
+<h1 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h1>
       
     </div>
     
@@ -466,7 +413,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://t5eng.github.io/2018/07/14/mac-github-hexo-blog/" title="在macOS平台搭建基于Github Page的Hexo博客">http://t5eng.github.io/2018/07/14/mac-github-hexo-blog/</a>
+    <a href="http://t5eng.github.io/2019/02/15/cv_vscode_mac_cpp/" title="在macOS安装OpenCV以及VScode的设置">http://t5eng.github.io/2019/02/15/cv_vscode_mac_cpp/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -506,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/13/Welcome-to-my-blog/" rel="next" title="Welcome to my blog">
-                <i class="fa fa-chevron-left"></i> Welcome to my blog
+              <a href="/2019/01/25/tfrecord/" rel="next" title="tfRecord 搬运">
+                <i class="fa fa-chevron-left"></i> tfRecord 搬运
               </a>
             
           </div>
@@ -515,10 +462,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/16/gcp-vpn/" rel="prev" title="利用Google Cloud Platform的1年免费期搭建私人梯子">
-                利用Google Cloud Platform的1年免费期搭建私人梯子 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -641,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关联Github"><span class="nav-text">关联Github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo主题"><span class="nav-text">安装hexo主题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Requirement"><span class="nav-text">Requirement</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译OpenCV的source-file"><span class="nav-text">编译OpenCV的source file</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VScode配置"><span class="nav-text">VScode配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用cmake-compile程序"><span class="nav-text">用cmake compile程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Usage"><span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大功告成"><span class="nav-text">大功告成</span></a></li></ol></div>
             
 
           </div>
