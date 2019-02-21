@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="Checkpoint &amp;amp; Loading123# 保存和加载整个模型 torch.save(model_object, &apos;model.pkl&apos;) model = torch.load(&apos;model.pkl&apos;) 123# 仅保存和加载模型参数(推荐使用) torch.save(model_object.state_dict(), &apos;params.pkl&apos;) model_object.load">
+<meta name="description" content="以下内容基于本人阅读理解 arXiv:1608.00367v1 [cs.CV] 1 Aug 2016 作为卷积网络实现超像素任务的开山鼻祖，虽然已经不是state-of-the-art的网络，但是新的论文还是会把srcnn拿出来diss一轮。  论文简介srcnn是第一篇用卷积网络做超像素的，效果超过了传统方法，但是计算量大，不能做到实时。fsrcnn基于srcnn，提出了新的网络结构。 srcn">
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PyTorch 常用api (不定期更新)">
-<meta property="og:url" content="http://t5eng.github.io/2019/01/25/torch/index.html">
+<meta property="og:title" content="SuperResolution by FSRCNN">
+<meta property="og:url" content="http://t5eng.github.io/2019/02/21/SuperReoslution/index.html">
 <meta property="og:site_name" content="T5eng&#39;s Blog">
-<meta property="og:description" content="Checkpoint &amp;amp; Loading123# 保存和加载整个模型 torch.save(model_object, &apos;model.pkl&apos;) model = torch.load(&apos;model.pkl&apos;) 123# 仅保存和加载模型参数(推荐使用) torch.save(model_object.state_dict(), &apos;params.pkl&apos;) model_object.load">
+<meta property="og:description" content="以下内容基于本人阅读理解 arXiv:1608.00367v1 [cs.CV] 1 Aug 2016 作为卷积网络实现超像素任务的开山鼻祖，虽然已经不是state-of-the-art的网络，但是新的论文还是会把srcnn拿出来diss一轮。  论文简介srcnn是第一篇用卷积网络做超像素的，效果超过了传统方法，但是计算量大，不能做到实时。fsrcnn基于srcnn，提出了新的网络结构。 srcn">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-25T19:08:56.431Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1g0egsscjvgj314i0fen81.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1g0ehush4tmj31260bgadw.jpg">
+<meta property="og:updated_time" content="2019-02-21T16:13:32.724Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PyTorch 常用api (不定期更新)">
-<meta name="twitter:description" content="Checkpoint &amp;amp; Loading123# 保存和加载整个模型 torch.save(model_object, &apos;model.pkl&apos;) model = torch.load(&apos;model.pkl&apos;) 123# 仅保存和加载模型参数(推荐使用) torch.save(model_object.state_dict(), &apos;params.pkl&apos;) model_object.load">
+<meta name="twitter:title" content="SuperResolution by FSRCNN">
+<meta name="twitter:description" content="以下内容基于本人阅读理解 arXiv:1608.00367v1 [cs.CV] 1 Aug 2016 作为卷积网络实现超像素任务的开山鼻祖，虽然已经不是state-of-the-art的网络，但是新的论文还是会把srcnn拿出来diss一轮。  论文简介srcnn是第一篇用卷积网络做超像素的，效果超过了传统方法，但是计算量大，不能做到实时。fsrcnn基于srcnn，提出了新的网络结构。 srcn">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1g0egsscjvgj314i0fen81.jpg">
 
 
 
@@ -124,7 +127,7 @@
 
 
 
-  <title>PyTorch 常用api (不定期更新) | T5eng's Blog</title>
+  <title>SuperResolution by FSRCNN | T5eng's Blog</title>
   
 
 
@@ -251,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://t5eng.github.io/2019/01/25/torch/">
+    <link itemprop="mainEntityOfPage" href="http://t5eng.github.io/2019/02/21/SuperReoslution/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Tseng">
@@ -268,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PyTorch 常用api (不定期更新)</h1>
+          <h1 class="post-title" itemprop="name headline">SuperResolution by FSRCNN</h1>
         
 
         <div class="post-meta">
@@ -280,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T22:01:00+03:00">
-                2019-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T18:28:00+03:00">
+                2019-02-21
               </time>
             
 
@@ -312,7 +315,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  546
+                  735
                 </span>
               
 
@@ -337,18 +340,34 @@
       
 
       
-        <h1 id="Checkpoint-amp-Loading"><a href="#Checkpoint-amp-Loading" class="headerlink" title="Checkpoint &amp; Loading"></a>Checkpoint &amp; Loading</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存和加载整个模型 </span></span><br><span class="line">torch.save(model_object, <span class="string">'model.pkl'</span>) </span><br><span class="line">model = torch.load(<span class="string">'model.pkl'</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 仅保存和加载模型参数(推荐使用) </span></span><br><span class="line">torch.save(model_object.state_dict(), <span class="string">'params.pkl'</span>) </span><br><span class="line">model_object.load_state_dict(torch.load(<span class="string">'params.pkl'</span>))</span><br></pre></td></tr></table></figure>
-<h1 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h1><p>参数的初始化其实就是对参数赋值。而我们需要学习的参数其实都是Variable，它其实是对Tensor的封装，同时提供了data，grad等接口，这就意味着我们可以直接对这些参数进行操作赋值了。这就是PyTorch简洁高效所在。 </p>
-<p>所以我们可以进行如下操作进行初始化，当然其实有其他的方法，但是这种方法是PyTorch作者所推崇的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def weight_init(m):</span><br><span class="line"># 使用isinstance来判断m属于什么类型</span><br><span class="line">    if isinstance(m, nn.Conv2d):</span><br><span class="line">        n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels</span><br><span class="line">        m.weight.data.normal_(0, math.sqrt(2. / n))</span><br><span class="line">    elif isinstance(m, nn.BatchNorm2d):</span><br><span class="line"># m中的weight，bias其实都是Variable，为了能学习参数以及后向传播</span><br><span class="line">        m.weight.data.fill_(1)</span><br><span class="line">        m.bias.data.zero_()</span><br></pre></td></tr></table></figure>
-<p>另一种常见的初始化方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nn.init.kaiming_normal(self.W.weight)</span><br><span class="line">nn.init.constant(self.W[<span class="number">0</span>].bias, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><h2 id="局部微调"><a href="#局部微调" class="headerlink" title="局部微调"></a>局部微调</h2><p>有时候我们加载了训练模型后，只想调节最后的几层，其他层不训练。其实不训练也就意味着不进行梯度计算，PyTorch中提供的requires_grad使得对训练的控制变得非常简单。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">model = torchvision.models.resnet18(pretrained=True)</span><br><span class="line">for param in model.parameters():</span><br><span class="line">    param.requires_grad = False</span><br><span class="line"># 替换最后的全连接层， 改为训练100类</span><br><span class="line"># 新构造的模块的参数默认requires_grad为True</span><br><span class="line">model.fc = nn.Linear(512, 100)</span><br><span class="line"></span><br><span class="line"># 只优化最后的分类层</span><br><span class="line">optimizer = optim.SGD(model.fc.parameters(), lr=1e-2, momentum=0.9)</span><br></pre></td></tr></table></figure>
-<h2 id="全局微调"><a href="#全局微调" class="headerlink" title="全局微调"></a>全局微调</h2><p>有时候我们需要对全局都进行finetune，只不过我们希望改换过的层和其他层的学习速率不一样，这时候我们可以把其他层和新层在optimizer中单独赋予不同的学习速率。比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ignored_params = list(map(id, model.fc.parameters()))</span><br><span class="line">base_params = filter(<span class="keyword">lambda</span> p: id(p) <span class="keyword">not</span> <span class="keyword">in</span> ignored_params,</span><br><span class="line">                     model.parameters())</span><br><span class="line"></span><br><span class="line">optimizer = torch.optim.SGD([</span><br><span class="line">            &#123;<span class="string">'params'</span>: base_params&#125;,</span><br><span class="line">            &#123;<span class="string">'params'</span>: model.fc.parameters(), <span class="string">'lr'</span>: <span class="number">1e-2</span>&#125;</span><br><span class="line">            ], lr=<span class="number">1e-3</span>, momentum=<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
-<p>其中base_params使用1e-3来训练，model.fc.parameters使用1e-2来训练，momentum是二者共有的。</p>
+        <p>以下内容基于本人阅读理解</p>
+<p>arXiv:1608.00367v1 [cs.CV] 1 Aug 2016</p>
+<p>作为卷积网络实现超像素任务的开山鼻祖，虽然已经不是state-of-the-art的网络，但是新的论文还是会把srcnn拿出来diss一轮。</p>
+<hr>
+<h2 id="论文简介"><a href="#论文简介" class="headerlink" title="论文简介"></a>论文简介</h2><p>srcnn是第一篇用卷积网络做超像素的，效果超过了传统方法，但是计算量大，不能做到实时。fsrcnn基于srcnn，提出了新的网络结构。</p>
+<h2 id="srcnn的短板"><a href="#srcnn的短板" class="headerlink" title="srcnn的短板"></a>srcnn的短板</h2><h4 id="预处理过程"><a href="#预处理过程" class="headerlink" title="预处理过程"></a>预处理过程</h4><p>srcnn在第一步就通过bicubic interpolation将输入图像放大n倍（n为超像素的倍数），因此此后进行的非线性映射过程，计算量以n^2倍提升。</p>
+<h4 id="非线性映射过程"><a href="#非线性映射过程" class="headerlink" title="非线性映射过程"></a>非线性映射过程</h4><p>非线性映射过程的层数越多，卷积核越大，效果越好，但是计算量也随之增大。</p>
+<h2 id="fsrcnn的改进"><a href="#fsrcnn的改进" class="headerlink" title="fsrcnn的改进"></a>fsrcnn的改进</h2><h4 id="引入deconvolution层"><a href="#引入deconvolution层" class="headerlink" title="引入deconvolution层"></a>引入deconvolution层</h4><p>deconv层作为输出层，这样mapping的过程都在low resolution space完成，计算量以n^2倍减少。</p>
+<h4 id="引入shrinking和expending"><a href="#引入shrinking和expending" class="headerlink" title="引入shrinking和expending"></a>引入shrinking和expending</h4><p>shrinking减少通道数，expending扩充通道数。因此mapping过程可以叠加多次卷积而计算量也不会很大。</p>
+<h4 id="沙漏状的architecture"><a href="#沙漏状的architecture" class="headerlink" title="沙漏状的architecture"></a>沙漏状的architecture</h4><p>一堆卷积操作的叠加实现end-to-end的超像素任务</p>
+<h4 id="速度很快"><a href="#速度很快" class="headerlink" title="速度很快"></a>速度很快</h4><p>比srcnn-ex快40倍，fsrcnn-s可以在cpu上做到实时而且效果不比srcnn差</p>
+<h4 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a>迁移学习</h4><p>训练好的网络只需要fintune deconv层就可以实现其他scale factor的sr</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g0egsscjvgj314i0fen81.jpg" alt="fsrcnnArchitecture"></p>
+<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><ol>
+<li>网络按scale factor = 3训练，收敛后只fintune deconv层即可得到其他scale factor（如2，4）。</li>
+<li>Augmenation，缩小了0.9到0.6倍以及旋转，数据集增大了20倍</li>
+<li>输入的图片需要根据scale factor剪裁成10像素左右的patch（约定俗成？），否则训练效果差5个dB。。</li>
+<li>论文作者自制了一个数据集：General1000，图片中比较少纯色块的，适合训练sr任务（可是剪出来的patch还是很多色块啊）。训练时用General1000和91images。</li>
+<li>BSD500是jpg格式的，不适合做sr</li>
+<li>feature extraction用5x5，deconv用9x9</li>
+<li>激活函数用PReLU，据说不会导致dead kernel</li>
+<li>每层的权重初始化采用不同的mean和stdev，weight和bias采用不同的learning rate</li>
+<li>只采用了MSE作为loss函数，目前state-of-the-art是perceptual loss以及adverserial loss</li>
+</ol>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1g0ehush4tmj31260bgadw.jpg" alt="result"></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>将convNet应用到超像素任务，并且非常快，结构非常精简，论文简单易懂。</p>
+<p>可是源码是陈旧是caffe，重现实验效果花了我1个月（其实是我太渣…）。忽略了源码中各层权重采用了不同的初始化参数，忽略了data需要做patch，忽略了网络是按scale factor = 3训练后再fintune到其他scale factor的。</p>
+<p>曾经是state-of-the-art的超像素网络，但是李飞飞的新论文显示，超像素的效果，不完全是基于psnr判断的，提出一个perceptual loss，替换掉MSE的loss function之后，输出的图片psnr较低，但是感官效果更好。</p>
 
       
     </div>
@@ -398,7 +417,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://t5eng.github.io/2019/01/25/torch/" title="PyTorch 常用api (不定期更新)">http://t5eng.github.io/2019/01/25/torch/</a>
+    <a href="http://t5eng.github.io/2019/02/21/SuperReoslution/" title="SuperResolution by FSRCNN">http://t5eng.github.io/2019/02/21/SuperReoslution/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -438,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/14/NonLocalNN/" rel="next" title="NonLocal Neural Network备忘">
-                <i class="fa fa-chevron-left"></i> NonLocal Neural Network备忘
+              <a href="/2019/02/15/cv_vscode_mac_cpp/" rel="next" title="在macOS安装OpenCV以及VScode的设置">
+                <i class="fa fa-chevron-left"></i> 在macOS安装OpenCV以及VScode的设置
               </a>
             
           </div>
@@ -447,10 +466,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/25/tfrecord/" rel="prev" title="tfRecord 搬运">
-                tfRecord 搬运 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -573,7 +588,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Checkpoint-amp-Loading"><span class="nav-text">Checkpoint &amp; Loading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialization"><span class="nav-text">Initialization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimization"><span class="nav-text">Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#局部微调"><span class="nav-text">局部微调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局微调"><span class="nav-text">全局微调</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#论文简介"><span class="nav-text">论文简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#srcnn的短板"><span class="nav-text">srcnn的短板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#预处理过程"><span class="nav-text">预处理过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非线性映射过程"><span class="nav-text">非线性映射过程</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#fsrcnn的改进"><span class="nav-text">fsrcnn的改进</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引入deconvolution层"><span class="nav-text">引入deconvolution层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引入shrinking和expending"><span class="nav-text">引入shrinking和expending</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#沙漏状的architecture"><span class="nav-text">沙漏状的architecture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#速度很快"><span class="nav-text">速度很快</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迁移学习"><span class="nav-text">迁移学习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trick"><span class="nav-text">Trick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验结果"><span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li></div>
             
 
           </div>
