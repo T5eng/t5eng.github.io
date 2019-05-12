@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1g0egsscjvgj314i0fen81.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1g0ehush4tmj31260bgadw.jpg">
-<meta property="og:updated_time" content="2019-02-21T16:13:32.724Z">
+<meta property="og:updated_time" content="2019-03-13T08:44:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SuperResolution by FSRCNN">
 <meta name="twitter:description" content="以下内容基于本人阅读理解 arXiv:1608.00367v1 [cs.CV] 1 Aug 2016 作为卷积网络实现超像素任务的开山鼻祖，虽然已经不是state-of-the-art的网络，但是新的论文还是会把srcnn拿出来diss一轮。  论文简介srcnn是第一篇用卷积网络做超像素的，效果超过了传统方法，但是计算量大，不能做到实时。fsrcnn基于srcnn，提出了新的网络结构。 srcn">
@@ -315,7 +315,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  735
+                  726
                 </span>
               
 
@@ -356,7 +356,7 @@
 <h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><ol>
 <li>网络按scale factor = 3训练，收敛后只fintune deconv层即可得到其他scale factor（如2，4）。</li>
 <li>Augmenation，缩小了0.9到0.6倍以及旋转，数据集增大了20倍</li>
-<li>输入的图片需要根据scale factor剪裁成10像素左右的patch（约定俗成？），否则训练效果差5个dB。。</li>
+<li>输入的图片需要根据scale factor剪裁成10像素左右的patch（约定俗成？）</li>
 <li>论文作者自制了一个数据集：General1000，图片中比较少纯色块的，适合训练sr任务（可是剪出来的patch还是很多色块啊）。训练时用General1000和91images。</li>
 <li>BSD500是jpg格式的，不适合做sr</li>
 <li>feature extraction用5x5，deconv用9x9</li>
@@ -467,6 +467,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/03/13/SuperResolution2/" rel="prev" title="SuperResolution by VDSR, PerceptualSR, SubpixelConvSR，ESRGAN">
+                SuperResolution by VDSR, PerceptualSR, SubpixelConvSR，ESRGAN <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -542,7 +546,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -629,7 +633,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">10.7k</span>
+    <span title="Site words total count">12.2k</span>
   
 </div>
 
