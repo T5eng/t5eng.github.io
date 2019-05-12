@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4n0L4.jpg">
 <meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4ndQU.jpg">
 <meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4nwyF.jpg">
-<meta property="og:updated_time" content="2019-05-12T15:37:06.380Z">
+<meta property="og:updated_time" content="2019-05-12T15:39:04.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Google Cloud Platform的1年免费期搭建私人梯子">
 <meta name="twitter:description" content="Google Cloud Platform(以下简称GCP)是类似于AWS的云服务器平台，提供托管、计算、储存、人工智能api等服务。GCP新用户注册一年或300usd的礼包，且具有台湾地区服务器，ping在40ms以内，与国内dns延迟相当。下面介绍如何快速搭建。  注册Gmail Account首先你要有梯子，注册一个gmail账号，然后才能开始搭建梯子。（滑稽 注册GCP 打开网页 http">
@@ -390,7 +390,7 @@
 <li>打开<code>VPC网络</code>设置，将刚刚创建的实例的外部IP设为静态，避免服务器重启后IP改变导致梯子失效。</li>
 </ol>
 <p><img src="https://s2.ax1x.com/2019/05/12/E4nDeJ.jpg" alt="image-20180714191138428"></p>
-<ol>
+<ol start="2">
 <li><p>设置防火墙规则，允许外部主机访问：</p>
 <ol>
 <li><p>流量方向<code>入站</code>、来源ip地址<code>0.0.0.0/0</code>、协议和端口<code>全部允许</code></p>
@@ -406,7 +406,7 @@
 <li>返回<code>compute engine</code>页面，用ssh通道操作实例:</li>
 </ol>
 <p><img src="https://s2.ax1x.com/2019/05/12/E4ndQU.jpg" alt="image-20180714191954536"></p>
-<ol>
+<ol start="2">
 <li><p>获取root权限</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo su</span><br></pre></td></tr></table></figure>
 </li>
@@ -418,7 +418,7 @@
 <p>服务器端口：建议为 8989<br>密码：自定义<br>加密方式：建议改为chacha20<br>协议（Protocol）：默认为 origin<br>混淆（obfs）：默认为 plain</p>
 </li>
 </ol>
-<ol>
+<ol start="5">
 <li>返回<code>compute engine</code>重置VM实例（即重启，不是停止或删除）</li>
 </ol>
 <p><strong>至此，服务器及梯子服务已经搭建完成。</strong></p>
@@ -693,7 +693,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">12.3k</span>
+    <span title="Site words total count">12.2k</span>
   
 </div>
 

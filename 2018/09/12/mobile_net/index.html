@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="T5eng&#39;s Blog">
 <meta property="og:description" content="以下内容基于本人阅读理解 arXiv:1704.04861v1 [cs.CV] 17 Apr 2017  arXiv:1801.04381v3 [cs.CV] 2 Apr 2018 论文简介谷歌对于目前网络结构为了追求准确率，而不断变深变大，牺牲运算速度的情况不爽。考虑到移动设备和嵌入式设备的运算能力，优化了网络结构，并提出两个超参数width multiplier和resolution mult">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/0069RVTdgy1fv7757x5b6j30tu13gjul.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1g0eg8ryc8sj30d80bwwff.jpg">
-<meta property="og:updated_time" content="2019-02-21T16:23:08.000Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uB1f.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4u09P.jpg">
+<meta property="og:updated_time" content="2019-05-12T15:48:36.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MobileNet概览">
 <meta name="twitter:description" content="以下内容基于本人阅读理解 arXiv:1704.04861v1 [cs.CV] 17 Apr 2017  arXiv:1801.04381v3 [cs.CV] 2 Apr 2018 论文简介谷歌对于目前网络结构为了追求准确率，而不断变深变大，牺牲运算速度的情况不爽。考虑到移动设备和嵌入式设备的运算能力，优化了网络结构，并提出两个超参数width multiplier和resolution mult">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/0069RVTdgy1fv7757x5b6j30tu13gjul.jpg">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/12/E4uB1f.jpg">
 
 
 
@@ -347,7 +347,7 @@
 <p>mobilenetV2中提出新的网络结构inverted residual block。</p>
 <h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p>通过优化网络结构，将mobile net的运算量减少到传统卷积网络的1/9，参数量减少到1/7。</p>
 <p>下图为mobile net的“深度可分离卷积”：</p>
-<p><img src="https://ws2.sinaimg.cn/large/0069RVTdgy1fv7757x5b6j30tu13gjul.jpg" alt="image-20180912235700174"></p>
+<p><img src="https://s2.ax1x.com/2019/05/12/E4uB1f.jpg" alt="image-20180912235700174"></p>
 <p>通过将传统的卷积，分解为 对单个通道的卷积后叠加（而非相加）再执行1x1卷积，减少参数量同时多增加一次batchnorm和relu运算，增加非线性。</p>
 <p>并不是稀疏矩阵就一定会比稠密矩阵运算快，但MobileNet将大部分运算集中在1x1卷积中（95%），可以直接调用General Matrix Multiply Funciton(GEMM)，反正就是很快。</p>
 <h2 id="新增两个超参数"><a href="#新增两个超参数" class="headerlink" title="新增两个超参数"></a>新增两个超参数</h2><h3 id="Width-multiplier"><a href="#Width-multiplier" class="headerlink" title="Width multiplier"></a>Width multiplier</h3><p>相当于压缩depthwise seperable Conv的kernel数，可以压缩计算过程中的通道数。</p>
@@ -359,7 +359,7 @@
 <li>activation space经过RuLU的<strong>非线性</strong>变换之后仍为非零，则这个变换存在一个对应的<strong>线性</strong>变换。</li>
 <li>仅当activation space可以映射到低维度的时候，ReLU才可能保留input space的所有信息。</li>
 </ol>
-<h2 id="Inverted-Residual-Block"><a href="#Inverted-Residual-Block" class="headerlink" title="Inverted Residual Block"></a>Inverted Residual Block</h2><p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g0eg8ryc8sj30d80bwwff.jpg" alt="InvertedResidualBlock"></p>
+<h2 id="Inverted-Residual-Block"><a href="#Inverted-Residual-Block" class="headerlink" title="Inverted Residual Block"></a>Inverted Residual Block</h2><p><img src="https://s2.ax1x.com/2019/05/12/E4u09P.jpg" alt="InvertedResidualBlock"></p>
 <p>residual connection是为了优化多层网络时的梯度</p>
 <ul>
 <li>中间层深度为0时，这个block就是identity function</li>
@@ -634,7 +634,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">12.3k</span>
+    <span title="Site words total count">12.2k</span>
   
 </div>
 
