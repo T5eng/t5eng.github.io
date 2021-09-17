@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MobileNet概览以下内容基于本人阅读理解 arXiv:1704.04861v1 [cs.CV] 17 Apr 2017 arXiv:1801.04381v3 [cs.CV] 2 Apr 2018 论文简介谷歌对于目前网络结构为了追求准确率，而不断变深变大，牺牲运算速度的情况不爽。考虑到移动设备和嵌入式设备的运算能力，优化了网络结构，并提出两个超参数width multiplier和resol">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2021/09/17/MobileNet%E6%A6%82%E8%A7%88/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MobileNet概览以下内容基于本人阅读理解 arXiv:1704.04861v1 [cs.CV] 17 Apr 2017 arXiv:1801.04381v3 [cs.CV] 2 Apr 2018 论文简介谷歌对于目前网络结构为了追求准确率，而不断变深变大，牺牲运算速度的情况不爽。考虑到移动设备和嵌入式设备的运算能力，优化了网络结构，并提出两个超参数width multiplier和resol">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uB1f.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4u09P.jpg">
+<meta property="article:published_time" content="2021-09-17T11:00:29.069Z">
+<meta property="article:modified_time" content="2021-09-17T11:00:29.069Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/12/E4uB1f.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-MobileNet概览" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/09/17/MobileNet%E6%A6%82%E8%A7%88/" class="article-date">
+  <time class="dt-published" datetime="2021-09-17T11:00:29.069Z" itemprop="datePublished">2021-09-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="MobileNet概览"><a href="#MobileNet概览" class="headerlink" title="MobileNet概览"></a>MobileNet概览</h1><p>以下内容基于本人阅读理解</p>
+<p>arXiv:1704.04861v1 [cs.CV] 17 Apr 2017</p>
+<p>arXiv:1801.04381v3 [cs.CV] 2 Apr 2018</p>
+<h2 id="论文简介"><a href="#论文简介" class="headerlink" title="论文简介"></a>论文简介</h2><p>谷歌对于目前网络结构为了追求准确率，而不断变深变大，牺牲运算速度的情况不爽。考虑到移动设备和嵌入式设备的运算能力，优化了网络结构，并提出两个超参数width multiplier和resolution multiplier以平衡调节准确率和运算速度的问题。</p>
+<p>mobilenetV2中提出新的网络结构inverted residual block。</p>
+<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p>通过优化网络结构，将mobile net的运算量减少到传统卷积网络的1/9，参数量减少到1/7。</p>
+<p>下图为mobile net的“深度可分离卷积”：</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4uB1f.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4uB1f.jpg" alt="image-20180912235700174"></a></p>
+<p>通过将传统的卷积，分解为 对单个通道的卷积后叠加（而非相加）再执行1x1卷积，减少参数量同时多增加一次batchnorm和relu运算，增加非线性。</p>
+<p>并不是稀疏矩阵就一定会比稠密矩阵运算快，但MobileNet将大部分运算集中在1x1卷积中（95%），可以直接调用General Matrix Multiply Funciton(GEMM)，反正就是很快。</p>
+<h2 id="新增两个超参数"><a href="#新增两个超参数" class="headerlink" title="新增两个超参数"></a>新增两个超参数</h2><h3 id="Width-multiplier"><a href="#Width-multiplier" class="headerlink" title="Width multiplier"></a>Width multiplier</h3><p>相当于压缩depthwise seperable Conv的kernel数，可以压缩计算过程中的通道数。</p>
+<h3 id="Resolution-multiplier"><a href="#Resolution-multiplier" class="headerlink" title="Resolution multiplier"></a>Resolution multiplier</h3><p>压缩feature map的尺寸，可以减少每层的输入尺寸，计算量以平方级别减少。</p>
+<h2 id="MobileNetV2"><a href="#MobileNetV2" class="headerlink" title="MobileNetV2"></a>MobileNetV2</h2><p>文章引入了manifold的概念，认为高维度空间的信息是可以被映射(encode)到低维度空间的。</p>
+<p>V1就是利用较少的通道数，让空间复杂度降低。width multiplier可以调整feature map的空间维度，让manifold充满(saturate?sapn?)feature map。但是这个方法有时候会失效：对一个1维直线使用ReLU，会输出一条2维的射线；对于n维空间，就会产生有n个结点的曲线。（不确定理解是否有误）</p>
+<p>2个可以确定高维度activation space可以映射到低维度子空间的条件：</p>
+<ol>
+<li>activation space经过RuLU的<strong>非线性</strong>变换之后仍为非零，则这个变换存在一个对应的<strong>线性</strong>变换。</li>
+<li>仅当activation space可以映射到低维度的时候，ReLU才可能保留input space的所有信息。</li>
+</ol>
+<h2 id="Inverted-Residual-Block"><a href="#Inverted-Residual-Block" class="headerlink" title="Inverted Residual Block"></a>Inverted Residual Block</h2><p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4u09P.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4u09P.jpg" alt="InvertedResidualBlock"></a></p>
+<p>residual connection是为了优化多层网络时的梯度</p>
+<ul>
+<li>中间层深度为0时，这个block就是identity function</li>
+<li>中间层深度为input深度时，这个block就是传统的resBlock</li>
+<li>中间层深度大于input深度是，效果最好（更高维度的特征表示，更稀疏，耦合更少，更好训练？）</li>
+</ul>
+<p>V2的论文同样引入一个新的hyper parameter用于调节中间层深度与输入层深度的ratio，试验结果同样是非常快，非常准。</p>
+<h2 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h2><p>以上为个人理解总结，部分结论不一定正确。</p>
+<p>欢迎指出我的错误。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/09/17/MobileNet%E6%A6%82%E8%A7%88/" data-id="cktob6bus0001qgtk4q28ftvi" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/09/17/%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E7%AE%80%E8%BF%B0%20-%20intro/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/09/17/%E5%88%A9%E7%94%A8Google%20Cloud%20Platform%E7%9A%841%E5%B9%B4%E5%85%8D%E8%B4%B9%E6%9C%9F%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E6%A2%AF%E5%AD%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/09/17/test-blog/">test_blog</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/SuperResolution%20by%20FSRCNN/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/%E5%9C%A8macOS%E5%AE%89%E8%A3%85OpenCV%E4%BB%A5%E5%8F%8AVScode%E7%9A%84%E8%AE%BE%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

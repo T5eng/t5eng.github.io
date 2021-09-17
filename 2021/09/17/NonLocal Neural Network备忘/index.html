@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="NonLocal Neural Network备忘论文简介论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。 intro对于序列数据（语音），long distance dependency是建立在递归操作上（如LSTM）；对于图像，long dist">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2021/09/17/NonLocal%20Neural%20Network%E5%A4%87%E5%BF%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="NonLocal Neural Network备忘论文简介论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。 intro对于序列数据（语音），long distance dependency是建立在递归操作上（如LSTM）；对于图像，long dist">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uh90.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uWhq.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4u5cT.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uTuF.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4u43V.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uqE9.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uIjU.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4u7B4.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uHHJ.jpg">
+<meta property="article:published_time" content="2021-09-17T11:02:47.413Z">
+<meta property="article:modified_time" content="2021-09-17T11:02:47.413Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/12/E4uh90.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-NonLocal Neural Network备忘" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/09/17/NonLocal%20Neural%20Network%E5%A4%87%E5%BF%98/" class="article-date">
+  <time class="dt-published" datetime="2021-09-17T11:02:47.413Z" itemprop="datePublished">2021-09-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="NonLocal-Neural-Network备忘"><a href="#NonLocal-Neural-Network备忘" class="headerlink" title="NonLocal Neural Network备忘"></a>NonLocal Neural Network备忘</h1><h2 id="论文简介"><a href="#论文简介" class="headerlink" title="论文简介"></a>论文简介</h2><p>论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。</p>
+<h2 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h2><p>对于序列数据（语音），long distance dependency是建立在递归操作上（如LSTM）；对于图像，long distance dependency是建立在由多层卷积操作建立的大感受域上的。</p>
+<p>卷积和递归都是基于当前邻域，实现long distance dependency必须反复遍历数据。计算方式低效，训练困难，信息不容易实现双向传递。</p>
+<p>跟self-attention有点关系，每个局部的输出都考虑了全局的加权平均值（self-attention是在embedding空间中计算的，该论文提出的Transformer模型革了RNN的命）。</p>
+<p>我们的网络表现很牛，而且可以作为一个基础模块，插入到已有网络中。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4uh90.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4uh90.jpg" alt="image-20190114133153895"></a></p>
+<p><strong>yi</strong>为NonLocal mean输出</p>
+<p><strong>i</strong>为当前计算点index</p>
+<p><strong>j</strong>为全局所有计算点index</p>
+<p>**f(xi,xj)**计算2点之间相似程度（paper提供了4种方式：Gaussian, Embedded Gaussian, Dot Product, Concatenation)</p>
+<p>**g(xj)**为j点的response值</p>
+<p>C(x)为归一化值，取值为sum_j {f(xi,xj)}</p>
+<h2 id="NonLocal-Block"><a href="#NonLocal-Block" class="headerlink" title="NonLocal Block"></a>NonLocal Block</h2><p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4uWhq.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4uWhq.jpg" alt="image-20190114133936809"></a></p>
+<p><strong>yi</strong>为NonLocal mean输出</p>
+<p><strong>Wz</strong>为NL层的可训练权重</p>
+<p><strong>xi</strong>作为残差连接，将Wz初始化为0时，则可以插入到已有模型中且不影响模型结果。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>基于ResNet50的Conv2D和Inflate3D版本，对比插入1、5、10个NonLocal Block之后的表现。</p>
+<p>C2D可以直接用ResNet50的预训练权重；I3D可以将卷积核的每片都用2D的版本初始化然后除以t（t为inflate的倍数）</p>
+<p>因为Inflate3D计算量比较大，因此每2个resBlock才inflate一个。</p>
+<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p>采用Embedded Gaussian计算NonLocal Mean时通道数选为输入通道的一半，再加一层pooling可以进一步降低计算量到1/4</p>
+<p>数据画面随机剪裁，从连续的64帧中随机截选<strong>32帧</strong>作为一组</p>
+<p>8GPU，每个GPU计算8组，相当于一个mini-batch有62组数据</p>
+<p>训练400k轮，lr=0.01，每150k减少一个数量级</p>
+<p>opt用momentum=0.9，weight decay=0.0001，在最后的global pooling layer用0.5的dropout</p>
+<p>在每个NonLocal Block的最后一层1x1x1中使用BatchNorm，并且该层权重初始化为0，保证可以插入到任意已训练的网络结构中</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4u5cT.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4u5cT.jpg" alt="image-20190114143358883"></a></p>
+<p>4种NonLocal Weight计算方法效果接近。</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4uTuF.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4uTuF.jpg" alt="image-20190114143420341"></a></p>
+<p>将1个NonLocal Block加到不同位置，效果接近</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4u43V.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4u43V.jpg" alt="image-20190114143455820"></a></p>
+<p>更深的网络也可以用NonLocal Block进一步提高表现（ResNet101）</p>
+<p>NonLocal的提升也不仅仅是因为深度增加了（R50 + 5-block &gt; R101 base）</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4uqE9.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4uqE9.jpg" alt="image-20190114143622712"></a></p>
+<p>NonLocal考虑space&amp;time时效果最好（计算量更大？）</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4uIjU.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4uIjU.jpg" alt="image-20190114143709720"></a></p>
+<p>对比I3D，减少了计算量，提高了效果</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4u7B4.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4u7B4.jpg" alt="image-20190115221557322"></a></p>
+<p>对比C2D、Inflate3D和NonLocal Inflate3D的表现。NonLocal可以与conv3D互补，得到更好表现</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4uHHJ.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4uHHJ.jpg" alt="image-20190115220819622"></a></p>
+<p>用128帧一组数据，效果更好（计算量翻4倍？）基于32帧的训练模型进行训练，lr=0.0025。在更长的数据中，NLI3D相比I3D也仍然有提升。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/09/17/NonLocal%20Neural%20Network%E5%A4%87%E5%BF%98/" data-id="cktob6buu0002qgtk1aj1e3r3" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/09/17/PyTorch%20%E5%B8%B8%E7%94%A8api%20(%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/09/17/test-blog/">test_blog</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/SuperResolution%20by%20FSRCNN/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/%E5%9C%A8macOS%E5%AE%89%E8%A3%85OpenCV%E4%BB%A5%E5%8F%8AVScode%E7%9A%84%E8%AE%BE%E7%BD%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
