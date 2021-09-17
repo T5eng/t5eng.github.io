@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>Yubinnzeng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Yubinnzeng&#39;s Blog">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Yubinnzeng&#39;s Blog">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Yubinn Zeng">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Yubinnzeng's Blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -42,7 +42,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">Yubinnzeng&#39;s Blog</a>
       </h1>
       
     </div>
@@ -71,10 +71,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-test-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-SuperResolution by VDSR, PerceptualSR, SubpixelConvSR，ESRGAN" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/09/17/test-blog/" class="article-date">
-  <time class="dt-published" datetime="2021-09-17T11:41:47.000Z" itemprop="datePublished">2021-09-17</time>
+    <a href="/2021/09/17/SuperResolution%20by%20VDSR,%20PerceptualSR,%20SubpixelConvSR%EF%BC%8CESRGAN/" class="article-date">
+  <time class="dt-published" datetime="2021-09-17T12:26:48.045Z" itemprop="datePublished">2021-09-17</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/09/17/test-blog/">test_blog</a>
+      <a class="p-name article-title" href="/2021/09/17/SuperResolution%20by%20VDSR,%20PerceptualSR,%20SubpixelConvSR%EF%BC%8CESRGAN/">SuperResolution by VDSR, PerceptualSR, SubpixelConvSR，ESRGAN</a>
     </h1>
   
 
@@ -93,65 +93,100 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p>以下内容基于本人阅读理解</p>
+<p>VDSR: arXiv:1511.04587v2 [cs.CV] 11 Nov 2016</p>
+<p>Perceptual Loss SR: arXiv:1609.05158v2 [cs.CV] 23 Sep 2016</p>
+<p>Subpixel SR: arXiv:1603.08155v1 [cs.CV] 27 Mar 2016</p>
+<p>SRGAN: arXiv:1609.04802v5 [cs.CV] 25 May 2017</p>
+<p>ESRGAN: arXiv:1809.00219v2 [cs.CV] 17 Sep 2018</p>
+<p>4个改进DeepLearning方法实现超分辨率的代表作。</p>
+<hr>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>srcnn证明了deep cnn end2end可以实现优于传统方法的超分辨率任务。</p>
+<p>本文介绍的4篇论文分别从网络结构、损失函数、upsample层、GAN四种不同角度优化原始的超分辨率网络。</p>
+<hr>
+<h2 id="VeryDeepSuperResolution"><a href="#VeryDeepSuperResolution" class="headerlink" title="VeryDeepSuperResolution"></a>VeryDeepSuperResolution</h2><p>原始的srcnn只用了3层，fsrcnn用了15层，已经非常难训练，拟合很慢。VDSR加上了残差连接、gradient clipping，实现了20层的网络和极高的learning rate，以及有更大的感知域（41x41）和在同一个网络实现不同upscale factor。</p>
+<h3 id="Residual-Learning"><a href="#Residual-Learning" class="headerlink" title="Residual Learning"></a>Residual Learning</h3><p><a target="_blank" rel="noopener" href="https://ws4.sinaimg.cn/large/006tKfTcgy1g119z3tje0j31c40bqjzt.jpg"><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g119z3tje0j31c40bqjzt.jpg" alt="image-20190313120326694"></a></p>
+<p>interpolation到hr分辨率，经过20层Conv后输出r，加上残差连接x，输出SR结果，因此r = y - x。Loss函数为x+r与y的Euclidean distance。</p>
+<h3 id="Gradient-Clipping"><a href="#Gradient-Clipping" class="headerlink" title="Gradient Clipping"></a>Gradient Clipping</h3><p>一般的clipping用[−θ, θ]，缺点是即使使用更大的lr，梯度也依然限制在[−θ, θ]内。因此提出可以动态clipping的方法：[-θ/lr , θ/lr]，这样就可以根据lr的策略动态控制Gradient Clipping的范围。</p>
+<h3 id="Multi—Scale"><a href="#Multi—Scale" class="headerlink" title="Multi—Scale"></a>Multi—Scale</h3><p>因为网络只负责reconstruction，上采样是用传统方法完成的。因此一个网络就可以实现多种不同的scale。</p>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p><a target="_blank" rel="noopener" href="https://ws3.sinaimg.cn/large/006tKfTcgy1g11atcmtsrj31bu0g4dp9.jpg"><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1g11atcmtsrj31bu0g4dp9.jpg" alt="image-20190313123237150"></a></p>
+<p>20层的conv的runtime居然比3层conv的srcnn还快？？？</p>
+<hr>
+<h2 id="PerceptualSR"><a href="#PerceptualSR" class="headerlink" title="PerceptualSR"></a>PerceptualSR</h2><p>PSNR（PeakSignalNoiseRatio）是通用的对比图片相似度的标准，与MSE成正比，因此很多CV任务的loss函数都采用了MSE，即输出和Ground Truth的每个像素的MSE。而Perceptual Loss采用了VGG中间某几层的activation output作为loss。在StyleTransfer和SuperResolution都得到了不错的结果。</p>
+<h3 id="Feature-Reconstruction-Loss"><a href="#Feature-Reconstruction-Loss" class="headerlink" title="Feature Reconstruction Loss"></a>Feature Reconstruction Loss</h3><p><a target="_blank" rel="noopener" href="https://ws1.sinaimg.cn/large/006tKfTcgy1g11ctpmiabj30ii02qjrl.jpg"><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g11ctpmiabj30ii02qjrl.jpg" alt="image-20190313134211674"></a></p>
+<p>其中：φ j (y)是VGG的第j层的activation output。</p>
+<p>相当于借用VGG做feature extraction，feat Loss是图片在higher level feature map的<strong>EuclideanNorm</strong>，而不是像素级别的距离，保存了图片的semantic和空间结构，但是没有考虑到色彩、纹理和形状。</p>
+<h3 id="Style-Reconstruction-Loss"><a href="#Style-Reconstruction-Loss" class="headerlink" title="Style Reconstruction Loss"></a>Style Reconstruction Loss</h3><p>先定义一个gram matrix：</p>
+<p><a target="_blank" rel="noopener" href="https://ws1.sinaimg.cn/large/006tKfTcgy1g11dojzc0jj30oi03mq3b.jpg"><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g11dojzc0jj30oi03mq3b.jpg" alt="image-20190313141150026"></a></p>
+<p>返回一个Cj x Cj的矩阵，计算φ j (y)的c通道和c‘通道对应的elementwise product的和。相当于计算channel wise的covariance。</p>
+<p><a target="_blank" rel="noopener" href="https://ws1.sinaimg.cn/large/006tKfTcgy1g11e7ssmdfj30fu01s0su.jpg"><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g11e7ssmdfj30fu01s0su.jpg" alt="image-20190313143020157"></a></p>
+<p>style Loss是2个图片的GramMatrix差值的<strong>FrobeniusNorm</strong>。</p>
+<h3 id="More-Specific"><a href="#More-Specific" class="headerlink" title="More Specific"></a>More Specific</h3><p><a target="_blank" rel="noopener" href="https://ws4.sinaimg.cn/large/006tKfTcgy1g169htpdtdj311k0csadz.jpg"><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g169htpdtdj311k0csadz.jpg" alt="image-20190317193438543"></a></p>
+<p>论文主要是利用了VGG16作为LossNetwork计算Loss，ImageTransformNet可以套用各种不同的网络。</p>
+<p>做StyleTransfer时，需要同时使用ys，y_hat，yc作为LossNet的输入。</p>
+<p><a target="_blank" rel="noopener" href="https://ws4.sinaimg.cn/large/006tKfTcgy1g16w2bk0r6j30wc02uwex.jpg"><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g16w2bk0r6j30wc02uwex.jpg" alt="image-20190317234812204"></a></p>
+<p>做SR任务时，仅将SR作为y_hat，HR作为yc，选用<strong>relu2_2层</strong>计算FeatureLoss。</p>
+<h3 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h3><p>论文展示了x4和x8，估计在x2和x3上表现不如其他方法。</p>
+<p>图片downsample前先进行高斯模糊（σ = 1.0）</p>
+<p>卷积层后面接spacial batch normalization</p>
+<p>选了VGG16第2层的输出作为φ(y)计算feat Loss，基于srcnn修改</p>
+<p>batch size = 4，计算200k步</p>
+<p>Adam，lr=1e-3</p>
+<p>test时先进行histogram matching处理，再计算psnr（偏高？）</p>
+<h3 id="Result-1"><a href="#Result-1" class="headerlink" title="Result"></a>Result</h3><p>细节和边缘表现优秀</p>
+<p>放大会看到部分色块超出原有边界</p>
+<hr>
+<h2 id="SubpixelConvSR-ESPCN"><a href="#SubpixelConvSR-ESPCN" class="headerlink" title="SubpixelConvSR (ESPCN)"></a>SubpixelConvSR (ESPCN)</h2><p>此前SR任务的upsample操作都是通过fractional convolution进行的，此论文提出了新的upsample方法：子像素重排列。</p>
+<h3 id="Network-Architecture"><a href="#Network-Architecture" class="headerlink" title="Network Architecture"></a>Network Architecture</h3><p><a target="_blank" rel="noopener" href="https://ws2.sinaimg.cn/large/006tKfTcgy1g174h2fsrcj317y0b2jwi.jpg"><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1g174h2fsrcj317y0b2jwi.jpg" alt="image-20190318132622948"></a></p>
+<p>全卷积，逐层增加通道数</p>
+<p>输入通道为c，upscale factor为r的话，最终通道数为c <em>r^2，即输出为</em><em>[h, w, c</em> r^2]**</p>
+<p>Sub-pixel cone layer通过像素重新排列（不需要计算），将feature map转换为**[h *r, w* r, c]**，实现上采样，论文中命名为periodic shuffling operator (PS)。由于这个过程不需要计算，所以速度非常快。</p>
+<p>参考SRCNN的3层网络结构，第一层conv(5x5, c, 64) 第二层conv(3x3, 64, 32) 第三层conv(3x3, 32, <strong>c*r^2</strong>) 第四层subpixel(r)</p>
+<h3 id="Experiment-1"><a href="#Experiment-1" class="headerlink" title="Experiment"></a>Experiment</h3><p>图片分辨率为(17r x 17r)，downsample前先进行高斯模糊</p>
+<p>激活函数选tanh</p>
+<p>训练100轮，lr=0.01，每1轮lr=lr*0.1</p>
+<p>用K2训练，91images上训练了3hr，另外一个模型在ImageNet上训练了7天。</p>
+<p>PSNR用matlab算（比较准）</p>
+<h3 id="Result-2"><a href="#Result-2" class="headerlink" title="Result"></a>Result</h3><p>如果激活函数跟SRCNN一样用relu，对比数据集分别用91images和ImageNet，结果显示ESPCN在更大的数据集上会有进一步的表现(+0.33)，而SRCNN不会(+0.07)</p>
+<p><a target="_blank" rel="noopener" href="https://ws2.sinaimg.cn/large/006tKfTcgy1g177vdw0o4j319u080go1.jpg"><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1g177vdw0o4j319u080go1.jpg" alt="image-20190318151055556"></a></p>
+<p>1080p的图片在GPU上超分辨率可以做到<strong>0.038s</strong>每帧（算是实时？），而SRCNN需要<strong>0.435s</strong>。</p>
+<h2 id="Enhanced-SuperResolution-GAN-ESRGAN"><a href="#Enhanced-SuperResolution-GAN-ESRGAN" class="headerlink" title="Enhanced SuperResolution GAN(ESRGAN)"></a>Enhanced SuperResolution GAN(ESRGAN)</h2><p>SRGAN的升级版，用生成对抗的方法实现超分辨率任务。与PerceptualLoss类似，只是这次的LossNetwork是可训练的，结果同样是在<strong>PSNR比较低</strong>的情况下得到<strong>感官效果更优秀</strong>的超分辨率图片。并且在超大upscale factor上的表现比PSNR方法的表现更好。</p>
+<h3 id="前作SRGAN"><a href="#前作SRGAN" class="headerlink" title="前作SRGAN"></a>前作SRGAN</h3><p>提出一个<strong>mean-opinion score</strong>（MOS），找26个人评分（1~5）然后求均值。</p>
+<p>GAN网络：Generator采用ResNet网络，Discriminator采用VGG。</p>
+<p><a target="_blank" rel="noopener" href="https://ws1.sinaimg.cn/large/006tKfTcgy1g17c13mpx2j30se0ionfc.jpg"><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g17c13mpx2j30se0ionfc.jpg" alt="image-20190318173207720"></a></p>
+<p>从manifold的角度分析：将patch映射到2维空间，可以发现GAN的结果与真实结果分布比较接近，而以MSE为objective function的结果偏离了真实分布，所以画面偏smooth。</p>
+<h4 id="SRGAN-Loss"><a href="#SRGAN-Loss" class="headerlink" title="SRGAN Loss"></a>SRGAN Loss</h4><p>Loss函数采用，典型的GAN的min-max函数（基于binomial的loss，然后训练Discriminator最大化误差，训练Generator最小化误差）</p>
+<p><a target="_blank" rel="noopener" href="https://ws1.sinaimg.cn/large/006tKfTcgy1g17c61avdqj30om04a750.jpg"><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g17c61avdqj30om04a750.jpg" alt="image-20190318175244115"></a></p>
+<p><a target="_blank" rel="noopener" href="https://ws3.sinaimg.cn/large/006tKfTcgy1g188yi3ju6j30j605mmxs.jpg"><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1g188yi3ju6j30j605mmxs.jpg" alt="image-20190319124717727"></a></p>
+<p>其中：content loss可以选择通常使用的MSE或者基于VGG的perceptual loss，adversarial loss就是Discriminator的输出</p>
+<p><a target="_blank" rel="noopener" href="https://ws1.sinaimg.cn/large/006tKfTcgy1g18a3yud9wj30h203udg4.jpg"><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g18a3yud9wj30h203udg4.jpg" alt="image-20190319132712222"></a></p>
+<p>论文中说，adversarial loss是可以让生成图片更接近实际图片的分布。</p>
+<p>没有采用cross entropy的log[1-D( G(input) )]而是采用了 -log( D( G(input) )</p>
+<h3 id="Experiment-2"><a href="#Experiment-2" class="headerlink" title="Experiment"></a>Experiment</h3><p>在ImageNet中随机选了350k张图片剪裁成96x96的patch。图片先进行高斯模糊，再downsample。LR preprocess为[0,1]，HR为[-1,1]。MSE也是在[-1,1]上计算，VGGLoss需要乘以1/12.75</p>
+<p>batch size = 16</p>
+<p>optimizer: Adam, beta1=0.9</p>
+<p>lr = 1e-4 1e6 iterations</p>
+<p>选用预训练SRResNet</p>
+<p>测试时去掉边缘4个像素（upsample时由于边缘像素的效果比较差）</p>
+<h4 id="Result-3"><a href="#Result-3" class="headerlink" title="Result"></a>Result</h4><p><a target="_blank" rel="noopener" href="https://ws1.sinaimg.cn/large/006tKfTcgy1g18dy21lhbj30rq0ca42t.jpg"><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g18dy21lhbj30rq0ca42t.jpg" alt="image-20190319153954384"></a></p>
+<p>用MOS计算，SRGAN是最高分。可是PSNR只有29.4dB(set5)和26.02dB(set14)。</p>
+<p>与之前的研究结论不一样，论文认为更深的残差网络可以进一步提高效果，但训练时间更长</p>
+<h3 id="ESRGAN本体"><a href="#ESRGAN本体" class="headerlink" title="ESRGAN本体"></a>ESRGAN本体</h3><p>在SRGAN的基础上：</p>
+<ol>
+<li>提出Res-in-Res Dense Block，更容易训练。移除Batch Norm，改为Res Scaling（将res的output乘以一个scale之后再加input）</li>
+<li>改用RelativisticGAN。</li>
+<li>VGGLoss改用activate前的feature map。</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/test-blog/" data-id="cktobxqzi0007oxtk9rxp7yqn" data-title="test_blog" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/09/17/SuperResolution%20by%20VDSR,%20PerceptualSR,%20SubpixelConvSR%EF%BC%8CESRGAN/" data-id="cktocv4vk0008yutkcm72etz1" data-title="SuperResolution by VDSR, PerceptualSR, SubpixelConvSR，ESRGAN" class="article-share-link">Share</a>
       
       
       
-    </footer>
-  </div>
-  
-</article>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
 
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/17/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-09-17T11:40:18.337Z" itemprop="datePublished">2021-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/09/17/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/hello-world/" data-id="cktobxqzh0006oxtkc97kc0h4" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
     </footer>
   </div>
   
@@ -170,9 +205,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/17/SuperResolution%20by%20FSRCNN/">SuperResolution by FSRCNN</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="SuperResolution-by-FSRCNN"><a href="#SuperResolution-by-FSRCNN" class="headerlink" title="SuperResolution by FSRCNN"></a>SuperResolution by FSRCNN</h1><p>以下内容基于本人阅读理解</p>
+        <p>以下内容基于本人阅读理解</p>
 <p>arXiv:1608.00367v1 [cs.CV] 1 Aug 2016</p>
 <p>作为卷积网络实现超像素任务的开山鼻祖，虽然已经不是state-of-the-art的网络，但是新的论文还是会把srcnn拿出来diss一轮。</p>
 <hr>
@@ -204,72 +249,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/SuperResolution%20by%20FSRCNN/" data-id="cktobxqzg0004oxtk641z9mn4" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/09/17/SuperResolution%20by%20FSRCNN/" data-id="cktocv4vi0005yutk5gnvfbd9" data-title="SuperResolution by FSRCNN" class="article-share-link">Share</a>
       
       
       
-    </footer>
-  </div>
-  
-</article>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
 
-
-
-  
-    <article id="post-在macOS安装OpenCV以及VScode的设置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/17/%E5%9C%A8macOS%E5%AE%89%E8%A3%85OpenCV%E4%BB%A5%E5%8F%8AVScode%E7%9A%84%E8%AE%BE%E7%BD%AE/" class="article-date">
-  <time class="dt-published" datetime="2021-09-17T11:03:49.901Z" itemprop="datePublished">2021-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="在macOS安装OpenCV以及VScode的设置"><a href="#在macOS安装OpenCV以及VScode的设置" class="headerlink" title="在macOS安装OpenCV以及VScode的设置"></a>在macOS安装OpenCV以及VScode的设置</h1><p>总结一下这两天在macOS上装OpenCV的血泪史</p>
-<hr>
-<h1 id="Requirement"><a href="#Requirement" class="headerlink" title="Requirement"></a>Requirement</h1><ol>
-<li>Xcode</li>
-<li>VScode</li>
-<li><a target="_blank" rel="noopener" href="https://opencv.org/releases.html">OpenCV官网</a>下载最新版source file</li>
-<li>brew install cmake</li>
-</ol>
-<h1 id="编译OpenCV的source-file"><a href="#编译OpenCV的source-file" class="headerlink" title="编译OpenCV的source file"></a>编译OpenCV的source file</h1><p>cd到<code>opencv-4.0.1</code>文件夹下（目前最新版是4.0.1）</p>
-<p><code>mkdir build</code>用于存放后面生成的文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd build </span><br><span class="line">cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. #会生成一堆文件在build文件夹以及/usr/local文件夹</span><br><span class="line">make # compile</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
-<p>这时候OpenCV已经安装好了</p>
-<h1 id="VScode配置"><a href="#VScode配置" class="headerlink" title="VScode配置"></a>VScode配置</h1><p>Demo cpp如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;opencv2/opencv.hpp&gt;</span><br><span class="line">#include &lt;chrono&gt;</span><br><span class="line">#include &lt;thread&gt;</span><br><span class="line"></span><br><span class="line">using namespace cv;</span><br><span class="line">int main(int argc, char** argv )</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;HEllo World!\n&quot;);</span><br><span class="line">    if ( argc != 2 )</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;usage: DisplayImage.out &lt;Image_Path&gt;\n&quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%s\n&quot;, argv[1]);</span><br><span class="line">    Mat image = imread( argv[1], 1 );</span><br><span class="line">    if ( !image.data )</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;No image data \n&quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    namedWindow(&quot;Display Image&quot;, WINDOW_AUTOSIZE );</span><br><span class="line">    imshow(&quot;Display Image&quot;, image);</span><br><span class="line">    waitKey(0);</span><br><span class="line">    std::this_thread::sleep_for(std::chrono::milliseconds(10000));</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>配置c_cpp_properties.json：增加opencv安装位置的路径</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;includePath&quot;: [</span><br><span class="line">                &quot;$&#123;workspaceFolder&#125;/**&quot;,</span><br><span class="line">                &quot;/usr/local/include/opencv4&quot;</span><br><span class="line">            ]</span><br></pre></td></tr></table></figure>
-
-<p>这时候code里面就可以用opencv的代码提示了</p>
-<h1 id="用cmake-compile程序"><a href="#用cmake-compile程序" class="headerlink" title="用cmake compile程序"></a>用cmake compile程序</h1><p>在main.cpp所在目录新建一个文件<code>CMakeLists.txt</code>，指定编译时需要用的库</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.13.4)</span><br><span class="line">set(CMAKE_CXX_STANDARD 11) //c++标准 cv4需要c11</span><br><span class="line">set(CMAKE_CXX_STANDARD_REQUIRED ON)</span><br><span class="line">project( CV ) //自定义project名称为CV</span><br><span class="line">find_package( OpenCV REQUIRED ) //搜索opencv库</span><br><span class="line">include_directories( $&#123;OpenCV_INCLUDE_DIRS&#125; ) //include opencv</span><br><span class="line">add_executable( CV main.cpp ) //生成的可执行命令，自定义为CV</span><br><span class="line">target_link_libraries( CV $&#123;OpenCV_LIBS&#125; )</span><br></pre></td></tr></table></figure>
-
-<p>然后</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir build #可自定义</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br></pre></td></tr></table></figure>
-
-<p>这时候已经vscode全部配置好了</p>
-<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><p>cpp代码写好之后，在<code>build</code>文件夹里面执行<code>make</code>就会编译cpp文件了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-- Configuring done</span><br><span class="line">-- Generating done</span><br><span class="line">-- Build files have been written to: /Users/T5eng/Desktop/CV/build</span><br><span class="line">Scanning dependencies of target CV</span><br><span class="line">[ 50%] Building CXX object CMakeFiles/CV.dir/main.cpp.o</span><br><span class="line">[100%] Linking CXX executable CV</span><br><span class="line">[100%] Built target CV</span><br></pre></td></tr></table></figure>
-
-<p>这时候会生成一个可执行命令CV</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./CV &lt;image-path&gt;</span><br></pre></td></tr></table></figure>
-
-<p>如无意外，会输出一个hello world同时显示图片。</p>
-<h1 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/%E5%9C%A8macOS%E5%AE%89%E8%A3%85OpenCV%E4%BB%A5%E5%8F%8AVScode%E7%9A%84%E8%AE%BE%E7%BD%AE/" data-id="cktobxqzl000aoxtk9o4yfurm" data-title="" class="article-share-link">Share</a>
-      
-      
-      
     </footer>
   </div>
   
@@ -288,9 +273,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/">tfRecord 搬运</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="tfRecord-搬运"><a href="#tfRecord-搬运" class="headerlink" title="tfRecord 搬运"></a>tfRecord 搬运</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最新上传的<a target="_blank" rel="noopener" href="https://github.com/ycszen/TensorFlowLaboratory/tree/master/mcnn">mcnn</a>中有完整的数据读写示例，可以参考。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最新上传的<a target="_blank" rel="noopener" href="https://github.com/ycszen/TensorFlowLaboratory/tree/master/mcnn">mcnn</a>中有完整的数据读写示例，可以参考。</p>
 <p>关于Tensorflow读取数据，官网给出了三种方法：</p>
 <p>**供给数据(Feeding)**： 在TensorFlow程序运行的每一步， 让Python代码来供给数据。</p>
 <p><strong>从文件读取数据</strong>： 在TensorFlow图的起始， 让一个输入管线从文件中读取数据。</p>
@@ -339,54 +334,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/" data-id="cktobxqzj0008oxtk7juka2qx" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/" data-id="cktocv4vm000dyutk9m60080j" data-title="tfRecord 搬运" class="article-share-link">Share</a>
       
       
       
-    </footer>
-  </div>
-  
-</article>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
 
-
-
-  
-    <article id="post-PyTorch 常用api (不定期更新)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/17/PyTorch%20%E5%B8%B8%E7%94%A8api%20(%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0)/" class="article-date">
-  <time class="dt-published" datetime="2021-09-17T11:03:05.559Z" itemprop="datePublished">2021-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="PyTorch-常用api-不定期更新"><a href="#PyTorch-常用api-不定期更新" class="headerlink" title="PyTorch 常用api (不定期更新)"></a>PyTorch 常用api (不定期更新)</h1><h1 id="Checkpoint-amp-Loading"><a href="#Checkpoint-amp-Loading" class="headerlink" title="Checkpoint &amp; Loading"></a>Checkpoint &amp; Loading</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存和加载整个模型 </span></span><br><span class="line">torch.save(model_object, <span class="string">&#x27;model.pkl&#x27;</span>) </span><br><span class="line">model = torch.load(<span class="string">&#x27;model.pkl&#x27;</span>)</span><br><span class="line"><span class="comment"># 仅保存和加载模型参数(推荐使用) </span></span><br><span class="line">torch.save(model_object.state_dict(), <span class="string">&#x27;params.pkl&#x27;</span>) </span><br><span class="line">model_object.load_state_dict(torch.load(<span class="string">&#x27;params.pkl&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-<h1 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h1><p>参数的初始化其实就是对参数赋值。而我们需要学习的参数其实都是Variable，它其实是对Tensor的封装，同时提供了data，grad等接口，这就意味着我们可以直接对这些参数进行操作赋值了。这就是PyTorch简洁高效所在。</p>
-<p>所以我们可以进行如下操作进行初始化，当然其实有其他的方法，但是这种方法是PyTorch作者所推崇的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weight_init</span>(<span class="params">m</span>):</span></span><br><span class="line"><span class="comment"># 使用isinstance来判断m属于什么类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(m, nn.Conv2d):</span><br><span class="line">        n = m.kernel_size[<span class="number">0</span>] * m.kernel_size[<span class="number">1</span>] * m.out_channels</span><br><span class="line">        m.weight.data.normal_(<span class="number">0</span>, math.sqrt(<span class="number">2.</span> / n))</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, nn.BatchNorm2d):</span><br><span class="line"><span class="comment"># m中的weight，bias其实都是Variable，为了能学习参数以及后向传播</span></span><br><span class="line">        m.weight.data.fill_(<span class="number">1</span>)</span><br><span class="line">        m.bias.data.zero_()</span><br></pre></td></tr></table></figure>
-
-<p>另一种常见的初始化方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nn.init.kaiming_normal(self.W.weight)</span><br><span class="line">nn.init.constant(self.W[<span class="number">0</span>].bias, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><h2 id="局部微调"><a href="#局部微调" class="headerlink" title="局部微调"></a>局部微调</h2><p>有时候我们加载了训练模型后，只想调节最后的几层，其他层不训练。其实不训练也就意味着不进行梯度计算，PyTorch中提供的requires_grad使得对训练的控制变得非常简单。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">model = torchvision.models.resnet18(pretrained=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.requires_grad = <span class="literal">False</span></span><br><span class="line"><span class="comment"># 替换最后的全连接层， 改为训练100类</span></span><br><span class="line"><span class="comment"># 新构造的模块的参数默认requires_grad为True</span></span><br><span class="line">model.fc = nn.Linear(<span class="number">512</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只优化最后的分类层</span></span><br><span class="line">optimizer = optim.SGD(model.fc.parameters(), lr=<span class="number">1e-2</span>, momentum=<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="全局微调"><a href="#全局微调" class="headerlink" title="全局微调"></a>全局微调</h2><p>有时候我们需要对全局都进行finetune，只不过我们希望改换过的层和其他层的学习速率不一样，这时候我们可以把其他层和新层在optimizer中单独赋予不同的学习速率。比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ignored_params = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">id</span>, model.fc.parameters()))</span><br><span class="line">base_params = <span class="built_in">filter</span>(<span class="keyword">lambda</span> p: <span class="built_in">id</span>(p) <span class="keyword">not</span> <span class="keyword">in</span> ignored_params,</span><br><span class="line">                     model.parameters())</span><br><span class="line"></span><br><span class="line">optimizer = torch.optim.SGD([</span><br><span class="line">            &#123;<span class="string">&#x27;params&#x27;</span>: base_params&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;params&#x27;</span>: model.fc.parameters(), <span class="string">&#x27;lr&#x27;</span>: <span class="number">1e-2</span>&#125;</span><br><span class="line">            ], lr=<span class="number">1e-3</span>, momentum=<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
-
-<p>其中base_params使用1e-3来训练，model.fc.parameters使用1e-2来训练，momentum是二者共有的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/PyTorch%20%E5%B8%B8%E7%94%A8api%20(%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0)/" data-id="cktobxqzf0003oxtk6uxwefjx" data-title="" class="article-share-link">Share</a>
-      
-      
-      
     </footer>
   </div>
   
@@ -405,9 +358,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/17/NonLocal%20Neural%20Network%E5%A4%87%E5%BF%98/">NonLocal Neural Network备忘</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="NonLocal-Neural-Network备忘"><a href="#NonLocal-Neural-Network备忘" class="headerlink" title="NonLocal Neural Network备忘"></a>NonLocal Neural Network备忘</h1><h2 id="论文简介"><a href="#论文简介" class="headerlink" title="论文简介"></a>论文简介</h2><p>论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。</p>
+        <h2 id="论文简介"><a href="#论文简介" class="headerlink" title="论文简介"></a>论文简介</h2><p>论文由NonLocal mean启发，每个位置的response（响应？）是由全局的权重值求和相关的。NonLocal block设计为可以插入到已有网络结构层与层之间的形式。在视频分类中表现优秀。</p>
 <h2 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h2><p>对于序列数据（语音），long distance dependency是建立在递归操作上（如LSTM）；对于图像，long distance dependency是建立在由多层卷积操作建立的大感受域上的。</p>
 <p>卷积和递归都是基于当前邻域，实现long distance dependency必须反复遍历数据。计算方式低效，训练困难，信息不容易实现双向传递。</p>
 <p>跟self-attention有点关系，每个局部的输出都考虑了全局的加权平均值（self-attention是在embedding空间中计算的，该论文提出的Transformer模型革了RNN的命）。</p>
@@ -451,10 +414,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/NonLocal%20Neural%20Network%E5%A4%87%E5%BF%98/" data-id="cktobxqze0002oxtkczhz8e0o" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/09/17/NonLocal%20Neural%20Network%E5%A4%87%E5%BF%98/" data-id="cktocv4vh0003yutk9vpz4akh" data-title="NonLocal Neural Network备忘" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
     </footer>
   </div>
   
@@ -473,9 +438,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/">ML 入门：归一化、标准化和正则化</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="ML-入门：归一化、标准化和正则化"><a href="#ML-入门：归一化、标准化和正则化" class="headerlink" title="ML 入门：归一化、标准化和正则化"></a>ML 入门：归一化、标准化和正则化</h1><p>因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29957294">https://zhuanlan.zhihu.com/p/29957294</a></p>
+        <p>因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29957294">https://zhuanlan.zhihu.com/p/29957294</a></p>
 <h2 id="0x01-归一化-Normalization"><a href="#0x01-归一化-Normalization" class="headerlink" title="0x01 归一化 Normalization"></a><strong>0x01 归一化 Normalization</strong></h2><p>归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。</p>
 <p>常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的归一化方法就是 <strong>Min-Max 归一化</strong>：</p>
 <h2 id="Min-Max-归一化"><a href="#Min-Max-归一化" class="headerlink" title="Min-Max 归一化"></a><strong>Min-Max 归一化</strong></h2><p><a target="_blank" rel="noopener" href="http://www.zhihu.com/equation?tex=x_%7Bnew%7D=%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D"><img src="http://www.zhihu.com/equation?tex=x_%7Bnew%7D=%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D" alt="x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}"></a></p>
@@ -546,10 +521,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/" data-id="cktobxqz20000oxtkcojvbvb1" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/" data-id="cktocv4va0000yutk9o8q5dd7" data-title="ML 入门：归一化、标准化和正则化" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
     </footer>
   </div>
   
@@ -568,9 +545,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/17/%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E7%AE%80%E8%BF%B0%20-%20intro/">量子计算简述 - intro</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="量子计算简述-intro"><a href="#量子计算简述-intro" class="headerlink" title="量子计算简述 - intro"></a>量子计算简述 - intro</h1><p>以下内容基于课堂理解</p>
+        <p>以下内容基于课堂理解</p>
 <h2 id="量子计算发展史"><a href="#量子计算发展史" class="headerlink" title="量子计算发展史"></a>量子计算发展史</h2><p>1982年，物理学家Feynman提出一个抽象模型，示范利用量子系统做运算。</p>
 <p>1985年，牛津大学的Deutsch提出了第一个量子计算机的设计蓝图和网络模型，定义了量子图灵机。</p>
 <p>1994年，Shor证明了大数质因子分解的问题，可以用量子计算机快速解决。</p>
@@ -597,10 +584,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E7%AE%80%E8%BF%B0%20-%20intro/" data-id="cktobxqzn000coxtka6qicmc0" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/09/17/%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E7%AE%80%E8%BF%B0%20-%20intro/" data-id="cktocv4vr000pyutkfkfl7oxk" data-title="量子计算简述 - intro" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+
     </footer>
   </div>
   
@@ -619,9 +608,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/09/17/MobileNet%E6%A6%82%E8%A7%88/">MobileNet概览</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="MobileNet概览"><a href="#MobileNet概览" class="headerlink" title="MobileNet概览"></a>MobileNet概览</h1><p>以下内容基于本人阅读理解</p>
+        <p>以下内容基于本人阅读理解</p>
 <p>arXiv:1704.04861v1 [cs.CV] 17 Apr 2017</p>
 <p>arXiv:1801.04381v3 [cs.CV] 2 Apr 2018</p>
 <h2 id="论文简介"><a href="#论文简介" class="headerlink" title="论文简介"></a>论文简介</h2><p>谷歌对于目前网络结构为了追求准确率，而不断变深变大，牺牲运算速度的情况不爽。考虑到移动设备和嵌入式设备的运算能力，优化了网络结构，并提出两个超参数width multiplier和resolution multiplier以平衡调节准确率和运算速度的问题。</p>
@@ -654,10 +653,279 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/MobileNet%E6%A6%82%E8%A7%88/" data-id="cktobxqzc0001oxtke2fs7l4q" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/09/17/MobileNet%E6%A6%82%E8%A7%88/" data-id="cktocv4ve0001yutk7hed7nwx" data-title="MobileNet概览" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-PyTorch 常用api (不定期更新)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/01/25/PyTorch%20%E5%B8%B8%E7%94%A8api%20(%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0)/" class="article-date">
+  <time class="dt-published" datetime="2019-01-24T16:00:00.000Z" itemprop="datePublished">2019-01-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/01/25/PyTorch%20%E5%B8%B8%E7%94%A8api%20(%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0)/">PyTorch 常用api (不定期更新)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Checkpoint-amp-Loading"><a href="#Checkpoint-amp-Loading" class="headerlink" title="Checkpoint &amp; Loading"></a>Checkpoint &amp; Loading</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存和加载整个模型 </span></span><br><span class="line">torch.save(model_object, <span class="string">&#x27;model.pkl&#x27;</span>) </span><br><span class="line">model = torch.load(<span class="string">&#x27;model.pkl&#x27;</span>)</span><br><span class="line"><span class="comment"># 仅保存和加载模型参数(推荐使用) </span></span><br><span class="line">torch.save(model_object.state_dict(), <span class="string">&#x27;params.pkl&#x27;</span>) </span><br><span class="line">model_object.load_state_dict(torch.load(<span class="string">&#x27;params.pkl&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h1 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h1><p>参数的初始化其实就是对参数赋值。而我们需要学习的参数其实都是Variable，它其实是对Tensor的封装，同时提供了data，grad等接口，这就意味着我们可以直接对这些参数进行操作赋值了。这就是PyTorch简洁高效所在。</p>
+<p>所以我们可以进行如下操作进行初始化，当然其实有其他的方法，但是这种方法是PyTorch作者所推崇的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weight_init</span>(<span class="params">m</span>):</span></span><br><span class="line"><span class="comment"># 使用isinstance来判断m属于什么类型</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(m, nn.Conv2d):</span><br><span class="line">        n = m.kernel_size[<span class="number">0</span>] * m.kernel_size[<span class="number">1</span>] * m.out_channels</span><br><span class="line">        m.weight.data.normal_(<span class="number">0</span>, math.sqrt(<span class="number">2.</span> / n))</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(m, nn.BatchNorm2d):</span><br><span class="line"><span class="comment"># m中的weight，bias其实都是Variable，为了能学习参数以及后向传播</span></span><br><span class="line">        m.weight.data.fill_(<span class="number">1</span>)</span><br><span class="line">        m.bias.data.zero_()</span><br></pre></td></tr></table></figure>
+
+<p>另一种常见的初始化方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nn.init.kaiming_normal(self.W.weight)</span><br><span class="line">nn.init.constant(self.W[<span class="number">0</span>].bias, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h1><h2 id="局部微调"><a href="#局部微调" class="headerlink" title="局部微调"></a>局部微调</h2><p>有时候我们加载了训练模型后，只想调节最后的几层，其他层不训练。其实不训练也就意味着不进行梯度计算，PyTorch中提供的requires_grad使得对训练的控制变得非常简单。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">model = torchvision.models.resnet18(pretrained=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.requires_grad = <span class="literal">False</span></span><br><span class="line"><span class="comment"># 替换最后的全连接层， 改为训练100类</span></span><br><span class="line"><span class="comment"># 新构造的模块的参数默认requires_grad为True</span></span><br><span class="line">model.fc = nn.Linear(<span class="number">512</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只优化最后的分类层</span></span><br><span class="line">optimizer = optim.SGD(model.fc.parameters(), lr=<span class="number">1e-2</span>, momentum=<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="全局微调"><a href="#全局微调" class="headerlink" title="全局微调"></a>全局微调</h2><p>有时候我们需要对全局都进行finetune，只不过我们希望改换过的层和其他层的学习速率不一样，这时候我们可以把其他层和新层在optimizer中单独赋予不同的学习速率。比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ignored_params = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">id</span>, model.fc.parameters()))</span><br><span class="line">base_params = <span class="built_in">filter</span>(<span class="keyword">lambda</span> p: <span class="built_in">id</span>(p) <span class="keyword">not</span> <span class="keyword">in</span> ignored_params,</span><br><span class="line">                     model.parameters())</span><br><span class="line"></span><br><span class="line">optimizer = torch.optim.SGD([</span><br><span class="line">            &#123;<span class="string">&#x27;params&#x27;</span>: base_params&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;params&#x27;</span>: model.fc.parameters(), <span class="string">&#x27;lr&#x27;</span>: <span class="number">1e-2</span>&#125;</span><br><span class="line">            ], lr=<span class="number">1e-3</span>, momentum=<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中base_params使用1e-3来训练，model.fc.parameters使用1e-2来训练，momentum是二者共有的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/01/25/PyTorch%20%E5%B8%B8%E7%94%A8api%20(%E4%B8%8D%E5%AE%9A%E6%9C%9F%E6%9B%B4%E6%96%B0)/" data-id="cktocv4vi0004yutk5pv19az4" data-title="PyTorch 常用api (不定期更新)" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-利用Google Cloud Platform的1年免费期搭建私人梯子" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/09/01/%E5%88%A9%E7%94%A8Google%20Cloud%20Platform%E7%9A%841%E5%B9%B4%E5%85%8D%E8%B4%B9%E6%9C%9F%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E6%A2%AF%E5%AD%90/" class="article-date">
+  <time class="dt-published" datetime="2018-08-31T16:00:00.000Z" itemprop="datePublished">2018-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/09/01/%E5%88%A9%E7%94%A8Google%20Cloud%20Platform%E7%9A%841%E5%B9%B4%E5%85%8D%E8%B4%B9%E6%9C%9F%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E6%A2%AF%E5%AD%90/">利用Google Cloud Platform的1年免费期搭建私人梯子</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>Google Cloud Platform(以下简称GCP)是类似于AWS的云服务器平台，提供托管、计算、储存、人工智能api等服务。GCP新用户注册一年或300usd的礼包，且具有台湾地区服务器，ping在40ms以内，与国内dns延迟相当。下面介绍如何快速搭建。</p>
+<hr>
+<h1 id="注册Gmail-Account"><a href="#注册Gmail-Account" class="headerlink" title="注册Gmail Account"></a>注册Gmail Account</h1><p>首先你要有梯子，注册一个gmail账号，然后才能开始搭建梯子。（滑稽</p>
+<h1 id="注册GCP"><a href="#注册GCP" class="headerlink" title="注册GCP"></a>注册GCP</h1><ol>
+<li><p>打开网页 <a target="_blank" rel="noopener" href="https://cloud.google.com/free/">https://cloud.google.com/free/</a> ，选择免费试用GCP</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4m2rQ.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4m2rQ.jpg" alt="img"></a></p>
+</li>
+<li><p>同意条款 - 填写个人信息、地址（随意） - 填写<code>visa/master</code>信用卡信息.</p>
+<p>信用卡用于支付服务器费用，并会尝试扣1usd验证，然后退还。由于有首年或300usd的新用户礼包，因此第一年不花钱。</p>
+</li>
+<li><p>注册后检查自己是否获得新用户礼包。</p>
+<ol>
+<li><p>打开控制台的结算页面概览：</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4nUzT.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4nUzT.jpg" alt="image-20180714185147878"></a></p>
+</li>
+<li><p>或者，右上角出现礼物盒图标：</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4n8ds.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4n8ds.jpg" alt="image-20180714185239439"></a></p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="开始部署服务器"><a href="#开始部署服务器" class="headerlink" title="开始部署服务器"></a>开始部署服务器</h1><ol>
+<li><p>创建实例：</p>
+<p>选择<code>compute engine</code>的vm实例</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4nNWV.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4nNWV.jpg" alt="image-20180714185720274"></a></p>
+</li>
+<li><p>配置实例：</p>
+<p>只做梯子，选低配的实例即可</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4nGon.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4nGon.jpg" alt="image-20180714185937988"></a></p>
+<p>启动磁盘更改一下系统，选择centOS：<a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4n3Zj.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4n3Zj.jpg" alt="image-20180714190113826"></a></p>
+<p>防火墙配置：</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4ntJ0.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4ntJ0.jpg" alt="image-20180714190557536"></a></p>
+<p>创建后等待片刻就看到运行状态了：</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4nYiq.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4nYiq.jpg" alt="image-20180714190826609"></a></p>
+</li>
+</ol>
+<h1 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h1><ol>
+<li>打开<code>VPC网络</code>设置，将刚刚创建的实例的外部IP设为静态，避免服务器重启后IP改变导致梯子失效。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4nDeJ.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4nDeJ.jpg" alt="image-20180714191138428"></a></p>
+<ol>
+<li><p>设置防火墙规则，允许外部主机访问：</p>
+<ol>
+<li><p>流量方向<code>入站</code>、来源ip地址<code>0.0.0.0/0</code>、协议和端口<code>全部允许</code></p>
+</li>
+<li><p>流量方向<code>出站</code>、来源ip地址<code>0.0.0.0/0</code>、协议和端口<code>全部允许</code></p>
+<p>（要创建两次防火墙规则，一次出站，一次入站）</p>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4n0L4.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4n0L4.jpg" alt="image-20180714191626974"></a></p>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="在实例中安装SS服务"><a href="#在实例中安装SS服务" class="headerlink" title="在实例中安装SS服务"></a>在实例中安装SS服务</h1><ol>
+<li>返回<code>compute engine</code>页面，用ssh通道操作实例:</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4ndQU.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4ndQU.jpg" alt="image-20180714191954536"></a></p>
+<ol>
+<li><p>获取root权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo su</span><br></pre></td></tr></table></figure></li>
+<li><p>安装SS：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh</span><br><span class="line">chmod +x shadowsocksR.sh</span><br></pre></td></tr></table></figure></li>
+<li><p>配置ss服务器信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log</span><br></pre></td></tr></table></figure>
+
+<p>服务器端口：建议为 8989<br>密码：自定义<br>加密方式：建议改为chacha20<br>协议（Protocol）：默认为 origin<br>混淆（obfs）：默认为 plain</p>
+</li>
+<li><p>返回<code>compute engine</code>重置VM实例（即重启，不是停止或删除）</p>
+</li>
+</ol>
+<p><strong>至此，服务器及梯子服务已经搭建完成。</strong></p>
+<h1 id="在shadowsocks客户端连接梯子"><a href="#在shadowsocks客户端连接梯子" class="headerlink" title="在shadowsocks客户端连接梯子"></a>在shadowsocks客户端连接梯子</h1><p>服务器地址即实例外部IP地址：<a target="_blank" rel="noopener" href="https://s2.ax1x.com/2019/05/12/E4nwyF.jpg"><img src="https://s2.ax1x.com/2019/05/12/E4nwyF.jpg" alt="image-20180714192856045"></a></p>
+<p>密码、端口、加密方式均按以上自定义内容输入</p>
+<hr>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://shadowsocks.org/en/index.html">shadowsocks官网</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.google.com/">google cloud官网</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/09/01/%E5%88%A9%E7%94%A8Google%20Cloud%20Platform%E7%9A%841%E5%B9%B4%E5%85%8D%E8%B4%B9%E6%9C%9F%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E6%A2%AF%E5%AD%90/" data-id="cktocv4vn000fyutk46nnext6" data-title="利用Google Cloud Platform的1年免费期搭建私人梯子" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-在macOS平台搭建基于Github Page的Hexo博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/09/01/%E5%9C%A8macOS%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EGithub%20Page%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2/" class="article-date">
+  <time class="dt-published" datetime="2018-08-31T16:00:00.000Z" itemprop="datePublished">2018-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/09/01/%E5%9C%A8macOS%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EGithub%20Page%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2/">在macOS平台搭建基于Github Page的Hexo博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>以下内容基于网络搬运及个人踩坑总结</p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ol>
+<li><p>前端工具<strong>Node.js</strong> - 用于生成静态页面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install nod</span><br></pre></td></tr></table></figure>
+
+<p>没有homebrew的话在Terminal键入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/in stall)&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>前端工具<strong>npm</strong> - Node Package Manager</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Git</strong><br>在Mac Store安装Xcode自带Git工具</p>
+<p>otherwise, visit <a target="_blank" rel="noopener" href="https://git-scm.com/download">https://git-scm.com/download</a></p>
+</li>
+<li><p><strong>Hexo</strong> - 博客框架，一键生成静态页</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g hexo</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><ol>
+<li><p>建立hexo目录，执行<code>hero init</code>命令：</p>
+</li>
+<li><pre><code>$ hexo init &lt;folder&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hexo将自动下载框架至`folder`。</span><br><span class="line"></span><br><span class="line">初始化后`folder`中内容：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+_config.yml    
+db.json 
+node_modules 
+package.json
+scaffolds
+source
+themes
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. 开启hexo服务器：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+$ hexo server
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   浏览器中打开网址[http://localhost:4000](http://0.0.0.0:4000/)，能看到hexo的hello world，则本地环境搭建成功。</span><br><span class="line"></span><br><span class="line">   [![img](https://s2.ax1x.com/2019/05/12/E4nX6S.jpg)](https://s2.ax1x.com/2019/05/12/E4nX6S.jpg)</span><br><span class="line"></span><br><span class="line">## 关联Github</span><br><span class="line"></span><br><span class="line">1. 创建新的Github Repository作为github page的仓库：</span><br><span class="line"></span><br><span class="line">   命名规则为：自定义.github.io</span><br><span class="line"></span><br><span class="line">   [![img](https://s2.ax1x.com/2019/05/12/E4njOg.jpg)](https://s2.ax1x.com/2019/05/12/E4njOg.jpg)</span><br><span class="line"></span><br><span class="line">2. 打开`folder`中`_config.yml` 编辑最后一行:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+deploy:
+  type: git
+  repo: https://github.com/user_name/自定义.github.io.git
+  branch: master
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. 用hexo生成静态页：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+$ hexo generate
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 部署网页：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+$ hexo deploy
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">若deploy出错，可能是未安装hexo deployer git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+$ npm install hexo-deployer-git --save
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">deploy成功会显示：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+INFO  Deploy done: git
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. 首次运行要输入github账户密码：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+Username for &#39;https://github.com&#39;:
+Password for &#39;https://github.com&#39;:
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. deploy执行后会将`folder`文件同步至Git Repo，根据网络状况可能上传失败，建议打开vpn。</span><br><span class="line"></span><br><span class="line">   上传成功后打开`https://自定义.github.io`即可看到和打开`https://localhost:400`一样的Hello World。</span><br><span class="line"></span><br><span class="line">## 安装hexo主题</span><br><span class="line"></span><br><span class="line">1. **[hexo官网主题页](https://hexo.io/themes/)** 有大量第三方主题。下面以**cactus**为例。</span><br><span class="line"></span><br><span class="line">2. 在`folder`目录下执行：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+$ git clone https://github.com/probberechts/hexo-theme-cactus.git themes/cactus
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   即可将主题下载到`themes`目录下`cactus`文件夹。</span><br><span class="line"></span><br><span class="line">3. 修改`folder`中`_config.yml`：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+# theme: landscape
+theme: cactus
+</code></pre>
+</li>
+<li><p>保存<code>_config.yml</code>后重新执行<code>hexo generate</code>及<code>hexo deploy</code>即可将新主题的静态页部署在git上。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/09/01/%E5%9C%A8macOS%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EGithub%20Page%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2/" data-id="cktocv4vp000kyutkbtp3fvn4" data-title="在macOS平台搭建基于Github Page的Hexo博客" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+
     </footer>
   </div>
   
@@ -681,15 +949,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">深度学习</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
     </div>
   </div>
 
@@ -702,23 +984,23 @@
       <ul>
         
           <li>
-            <a href="/2021/09/17/test-blog/">test_blog</a>
+            <a href="/2021/09/17/SuperResolution%20by%20VDSR,%20PerceptualSR,%20SubpixelConvSR%EF%BC%8CESRGAN/">SuperResolution by VDSR, PerceptualSR, SubpixelConvSR，ESRGAN</a>
           </li>
         
           <li>
-            <a href="/2021/09/17/hello-world/">Hello World</a>
+            <a href="/2021/09/17/SuperResolution%20by%20FSRCNN/">SuperResolution by FSRCNN</a>
           </li>
         
           <li>
-            <a href="/2021/09/17/SuperResolution%20by%20FSRCNN/">(no title)</a>
+            <a href="/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/">tfRecord 搬运</a>
           </li>
         
           <li>
-            <a href="/2021/09/17/%E5%9C%A8macOS%E5%AE%89%E8%A3%85OpenCV%E4%BB%A5%E5%8F%8AVScode%E7%9A%84%E8%AE%BE%E7%BD%AE/">(no title)</a>
+            <a href="/2021/09/17/NonLocal%20Neural%20Network%E5%A4%87%E5%BF%98/">NonLocal Neural Network备忘</a>
           </li>
         
           <li>
-            <a href="/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/">(no title)</a>
+            <a href="/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/">ML 入门：归一化、标准化和正则化</a>
           </li>
         
       </ul>
@@ -734,7 +1016,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2021 John Doe<br>
+      &copy; 2021 Yubinn Zeng<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

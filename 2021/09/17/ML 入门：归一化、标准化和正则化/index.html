@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>ML 入门：归一化、标准化和正则化 | Yubinnzeng&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="ML 入门：归一化、标准化和正则化因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;29957294 0x01 归一化 Normalization归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。 常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的归">
+  <meta name="description" content="因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;29957294 0x01 归一化 Normalization归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。 常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的归一化方法就是 Min-Max 归一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="ML 入门：归一化、标准化和正则化">
 <meta property="og:url" content="http://example.com/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ML 入门：归一化、标准化和正则化因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;29957294 0x01 归一化 Normalization归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。 常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的归">
+<meta property="og:site_name" content="Yubinnzeng&#39;s Blog">
+<meta property="og:description" content="因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;29957294 0x01 归一化 Normalization归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。 常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的归一化方法就是 Min-Max 归一">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.zhihu.com/equation?tex=x_%7Bnew%7D=%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D">
 <meta property="og:image" content="http://www.zhihu.com/equation?tex=7.50%C3%9710%5E%7B9%7D/L">
@@ -50,12 +50,13 @@
 <meta property="og:image" content="http://www.zhihu.com/equation?tex=J(w,b)=%5Cfrac%7B1%7D%7Bm%7D+%5Csum_%7Bi=1%7D%5E%7Bm%7DL(%5Chat%7By%7D,y)+%5Cfrac%7B%5Clambda+%7D%7B2m%7D%5Cleft+%5C%7C+w+%5Cright+%5C%7C%5E%7B2%7D_%7B2%7D">
 <meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4KpuD.jpg">
 <meta property="article:published_time" content="2021-09-17T11:02:27.164Z">
-<meta property="article:modified_time" content="2021-09-17T11:02:27.164Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2021-09-17T12:37:10.588Z">
+<meta property="article:author" content="Yubinn Zeng">
+<meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.zhihu.com/equation?tex=x_%7Bnew%7D=%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Yubinnzeng's Blog" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -83,7 +84,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">Yubinnzeng&#39;s Blog</a>
       </h1>
       
     </div>
@@ -120,9 +121,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      ML 入门：归一化、标准化和正则化
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="ML-入门：归一化、标准化和正则化"><a href="#ML-入门：归一化、标准化和正则化" class="headerlink" title="ML 入门：归一化、标准化和正则化"></a>ML 入门：归一化、标准化和正则化</h1><p>因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29957294">https://zhuanlan.zhihu.com/p/29957294</a></p>
+        <p>因为经常混淆Normalization和Regularization两个名词，所以搬运了一篇文章。原文：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29957294">https://zhuanlan.zhihu.com/p/29957294</a></p>
 <h2 id="0x01-归一化-Normalization"><a href="#0x01-归一化-Normalization" class="headerlink" title="0x01 归一化 Normalization"></a><strong>0x01 归一化 Normalization</strong></h2><p>归一化一般是将数据映射到指定的范围，用于去除不同维度数据的量纲以及量纲单位。</p>
 <p>常见的映射范围有 [0, 1] 和 [-1, 1] ，最常见的归一化方法就是 <strong>Min-Max 归一化</strong>：</p>
 <h2 id="Min-Max-归一化"><a href="#Min-Max-归一化" class="headerlink" title="Min-Max 归一化"></a><strong>Min-Max 归一化</strong></h2><p><a target="_blank" rel="noopener" href="http://www.zhihu.com/equation?tex=x_%7Bnew%7D=%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D"><img src="http://www.zhihu.com/equation?tex=x_%7Bnew%7D=%5Cfrac%7Bx-x_%7Bmin%7D%7D%7Bx_%7Bmax%7D-x_%7Bmin%7D%7D" alt="x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}"></a></p>
@@ -193,10 +204,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/" data-id="cktobxqz20000oxtkcojvbvb1" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/" data-id="cktocv4va0000yutk9o8q5dd7" data-title="ML 入门：归一化、标准化和正则化" class="article-share-link">Share</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
     </footer>
   </div>
   
@@ -207,7 +220,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          (no title)
+          NonLocal Neural Network备忘
         
       </div>
     </a>
@@ -215,7 +228,7 @@
   
     <a href="/2021/09/17/%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E7%AE%80%E8%BF%B0%20-%20intro/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
+      <div class="article-nav-title">量子计算简述 - intro</div>
     </a>
   
 </nav>
@@ -232,15 +245,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 20px;">深度学习</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
     </div>
   </div>
 
@@ -253,23 +280,23 @@
       <ul>
         
           <li>
-            <a href="/2021/09/17/test-blog/">test_blog</a>
+            <a href="/2021/09/17/SuperResolution%20by%20VDSR,%20PerceptualSR,%20SubpixelConvSR%EF%BC%8CESRGAN/">SuperResolution by VDSR, PerceptualSR, SubpixelConvSR，ESRGAN</a>
           </li>
         
           <li>
-            <a href="/2021/09/17/hello-world/">Hello World</a>
+            <a href="/2021/09/17/SuperResolution%20by%20FSRCNN/">SuperResolution by FSRCNN</a>
           </li>
         
           <li>
-            <a href="/2021/09/17/SuperResolution%20by%20FSRCNN/">(no title)</a>
+            <a href="/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/">tfRecord 搬运</a>
           </li>
         
           <li>
-            <a href="/2021/09/17/%E5%9C%A8macOS%E5%AE%89%E8%A3%85OpenCV%E4%BB%A5%E5%8F%8AVScode%E7%9A%84%E8%AE%BE%E7%BD%AE/">(no title)</a>
+            <a href="/2021/09/17/NonLocal%20Neural%20Network%E5%A4%87%E5%BF%98/">NonLocal Neural Network备忘</a>
           </li>
         
           <li>
-            <a href="/2021/09/17/tfRecord%20%E6%90%AC%E8%BF%90/">(no title)</a>
+            <a href="/2021/09/17/ML%20%E5%85%A5%E9%97%A8%EF%BC%9A%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/">ML 入门：归一化、标准化和正则化</a>
           </li>
         
       </ul>
@@ -285,7 +312,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2021 John Doe<br>
+      &copy; 2021 Yubinn Zeng<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
